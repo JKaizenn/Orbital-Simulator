@@ -23,6 +23,11 @@ public:
    {
       // Constructor Tests
       defaultConstructor();
+      destroyHubble_4Parts();
+      destroyHubbleTelescope_3Fragments();
+      destroyHubbleComputer_2Fragments();
+      destroyHubbleLeft_2Fragments();
+      destroyHubbleRight_2Fragments();
       
       report("Hubble");
    }
@@ -30,5 +35,10 @@ public:
 private:
    // Constructor Tests
    void defaultConstructor();
+   void destroyHubble_4Parts();
+   void destroyHubbleTelescope_3Fragments();
+   void destroyHubbleComputer_2Fragments();
+   void destroyHubbleLeft_2Fragments();
+   void destroyHubbleRight_2Fragments();
    
 };

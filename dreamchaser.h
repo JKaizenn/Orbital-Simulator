@@ -11,7 +11,7 @@
 #include "satellite.h"
 #include "uiInteract.h"
 
-class TestDreamChaser;
+class TestDreamchaser;
 
 /***************************************************
  * DREAMCHASER
@@ -20,7 +20,7 @@ class TestDreamChaser;
  ***************************************************/
 class Dreamchaser : public Satellite
 {
-   friend TestDreamChaser;
+   friend TestDreamchaser;
    
 public:
    // Constructors

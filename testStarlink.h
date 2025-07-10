@@ -23,6 +23,9 @@ public:
    {
       // Constructor Tests
       defaultConstructor();
+      destroyStarlink_2Part_2Fragments();
+      destroyStarlinkBody_3Fragments();
+      destroyStarlinkArray_3Fragments();
       
       report("Starlink");
    }
@@ -30,5 +33,9 @@ public:
 private:
    // Constructor Tests
    void defaultConstructor();
+   void destroyStarlink_2Part_2Fragments();
+   void destroyStarlinkBody_3Fragments();
+   void destroyStarlinkArray_3Fragments();
+   
    
 };

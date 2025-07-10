@@ -2,7 +2,7 @@
  * Source File:
  *    TEST SPUTNIK
  * Author:
- *    Roger Galan & Jessen Forbush
+ *    Jessen Forbush & Roger Galan
  * Summary:
  *    The unit tests for Sputnik
  ************************************************************************/
@@ -14,7 +14,7 @@
 /*************************************
  * DEFAULT CONSTRUCTOR
  * input: nothing
- * output: position (-36515095.13, 21082000.0), velocity (2050.0, 2684.68), dead(false), angularVelocity(0.05), radius(4.0)
+ * output: position (-36515095.13, 21082000.0), velocity (2050.0, 2684.68), dead(false), angularVelocity(0.01), radius(4.0)
  **************************************/
 void TestSputnik::defaultConstructor()
 {
@@ -29,9 +29,47 @@ void TestSputnik::defaultConstructor()
    assertEquals(s.velocity.dx, 2050.0);
    assertEquals(s.velocity.dy, 2684.68);
    assertEquals(s.dead, false);
-   assertEquals(s.angularVelocity, 0.05); 
+   assertEquals(s.angularVelocity, 0.01);
    assertEquals(s.radius, 4.0);
    assertEquals(s.direction.radians, 0.0);
    
    // TEARDOWN
+}
+
+/*************************************
+ * WHOLE SPUTNIK DESTROY
+ * input: satellite vector
+ * output: 4 Fragments
+ **************************************/
+void TestSputnik::destroySputnik_4Fragments()
+{
+   // SETUP
+   Sputnik sputnik;
+   sputnik.direction.radians = M_PI;
+   std::vector<std::unique_ptr<Satellite>> satellites;
+   
+   // EXERCISE
+   sputnik.destroy(&satellites);
+   
+   // VERIFY
+   assertUnit(satellites.size() == 4); // 4 fragments
+   Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
+   Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
+   Fragment* f2 = dynamic_cast<Fragment*>(satellites[2].get());
+   Fragment* f3 = dynamic_cast<Fragment*>(satellites[3].get());
+   assertUnit(f0 != nullptr);
+   assertUnit(f1 != nullptr);
+   assertUnit(f2 != nullptr);
+   assertUnit(f3 != nullptr);
+   assertUnit(f0->direction.radians == M_PI);
+   assertUnit(f1->direction.radians == M_PI);
+   assertUnit(f2->direction.radians == M_PI);
+   assertUnit(f3->direction.radians == M_PI);
+   assertUnit(f0->radius == 2.0);
+   assertUnit(f1->radius == 2.0);
+   assertUnit(f2->radius == 2.0);
+   assertUnit(f3->radius == 2.0);
+   
+   // TEARDOWN
+   satellites.clear(); // unique_ptr automatically frees memory on destroy
 }

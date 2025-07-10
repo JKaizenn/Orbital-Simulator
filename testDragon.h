@@ -23,6 +23,10 @@ public:
    {
       // Constructor Tests
       defaultConstructor();
+      destroyDragon_3Parts_2Fragments();
+      destroyDragonCenter_4Fragments();
+      destroyDragonLeft_2Fragments();
+      destroyDragonRight_2Fragments();
       
       report("Dragon");
    }
@@ -30,5 +34,10 @@ public:
 private:
    // Constructor Tests
    void defaultConstructor();
+   void destroyDragon_3Parts_2Fragments();
+   void destroyDragonCenter_4Fragments();
+   void destroyDragonLeft_2Fragments();
+   void destroyDragonRight_2Fragments();
+   
    
 };

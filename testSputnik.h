@@ -23,6 +23,8 @@ public:
    {
       // Constructor Tests
       defaultConstructor();
+      destroySputnik_4Fragments();
+      
       
       report("Sputnik");
    }
@@ -30,5 +32,5 @@ public:
 private:
    // Constructor Tests
    void defaultConstructor();
-   
+   void destroySputnik_4Fragments();
 };

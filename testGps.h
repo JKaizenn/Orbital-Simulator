@@ -28,12 +28,10 @@ public:
       defaultConstructor3();
       defaultConstructor4();
       defaultConstructor5();
-      
-      // Collision
-      
-      // Fragment
-      
-      // Parts
+      destroyGps_3Parts2Fragments();
+      destroyGpsCenter_3Fragments();
+      destroyGpsLeft_3Fragments();
+      destroyGpsRight_3Fragments();
       
       report("GPS");
    }
@@ -46,5 +44,10 @@ private:
    void defaultConstructor3();
    void defaultConstructor4();
    void defaultConstructor5();
+   void destroyGps_3Parts2Fragments();
+   void destroyGpsCenter_3Fragments();
+   void destroyGpsLeft_3Fragments();
+   void destroyGpsRight_3Fragments();
+   
    
 };

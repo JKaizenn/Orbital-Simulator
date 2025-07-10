@@ -1,22 +1,25 @@
 /***********************************************************************
- * Header File:
+ * Source File:
  *    Gps
  * Author:
-*    Roger Galan & Jessen Forbush
+ *    Roger Galan & Jessen Forbush
  * Summary:
  *    The Gps class
  ************************************************************************/
 
+#pragma once
 #include "gps.h"
 
 /***************************************************
- * Gps
- * a GPS satellite, there will be 6 in the program
+ * GPS NON DEFAULT CONSTRUCTOR
+ * a GPS satellite, there will be 6 in the program.
+ * Each will have a specific position, velocity,
+ * and radius of 10 pixels
  ***************************************************/
 Gps::Gps(int index)
 {
-   radius = 12.0;                  
-   angularVelocity = .05;
+   radius = 12.0;
+   angularVelocity = 0.05;
    
    if (index == 0)
    {
@@ -52,28 +55,70 @@ Gps::Gps(int index)
 
 /***************************************************
  * destroy
- * When a GPS breaks, it creates 3 Parts and 2 Fragments.
+ * When a Whole GPS breaks, it creates 3 Parts and 2 Fragments.
  ***************************************************/
 void Gps::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 {
-   // kill();
+   satellites->push_back(std::make_unique<GpsCenter>(*this, Angle(60.0), 8.0));
+   satellites->push_back(std::make_unique<GpsLeft>(*this, Angle(120.0), 7.0));
+   satellites->push_back(std::make_unique<GpsRight>(*this, Angle(180.0), 7.0));
+   
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(240.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(300.0)));
+}
 
-   //satellites->push_back(std::make_unique<GPSCenter>(*this, Angle()));
-   //satellites->push_back(std::make_unique<GPSLeftSolarArray>(*this, Angle()));
-   //satellites->push_back(std::make_unique<GPSRightSolarArray>(*this, Angle()));
+void GpsCenter::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
+{
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(30.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(150.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(270.0)));
+}
 
-   //satellites->push_back(std::make_unique<Fragment>(*this, Angle()));
-   //satellites->push_back(std::make_unique<Fragment>(*this, Angle()));
+void GpsLeft::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
+{
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(60.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(180.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(300.0)));
+}
+
+void GpsRight::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
+{
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(90.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(210.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(330.0)));
 }
 
 /***************************************************
-* PIECE DRAW
-* Draw all the pieces.
-***************************************************/
+ * SATELLITE DRAW
+ * Draw the satellite
+ ***************************************************/
 void Gps::draw(ogstream* pgout) const
 {
    if (pgout != nullptr)
    {
-      pgout->drawGPS(position, direction.getRadians());
+      pgout->drawGPS(this->position, this->direction.getRadians());
+   }
+}
+void GpsCenter::draw(ogstream* pgout) const
+{
+   if (pgout != nullptr)
+   {
+      pgout->drawGPSCenter(this->position, this->direction.getRadians());
+   }
+}
+
+void GpsLeft::draw(ogstream* pgout) const
+{
+   if (pgout != nullptr)
+   {
+      pgout->drawGPSLeft(this->position, this->direction.getRadians());
+   }
+}
+
+void GpsRight::draw(ogstream* pgout) const
+{
+   if (pgout != nullptr)
+   {
+      pgout->drawGPSRight(this->position, this->direction.getRadians());
    }
 }

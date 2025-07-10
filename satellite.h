@@ -2,7 +2,7 @@
  * Header File:
  *    Satellite
  * Author:
- *    Roger Galan & Jessen Forbush 
+ *    Roger Galan & Jessen Forbush
  * Summary:
  *    All the information about the satellite base class
  ************************************************************************/
@@ -12,66 +12,73 @@
 #include "position.h"  // for POINT
 #include "velocity.h"  // for VELOCITY
 #include "uiDraw.h"    // for DRAW* and RANDOM
+#include "uiInteract.h"  // for Interface
 #include "angle.h"     // for ANGLE
 
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <cassert>  // for ASSERT
-#include <iostream>
 #include <vector>
 
-# define TIME 48.0
+#define TIME 48.0
 # define RADIUS_EARTH 6378000.0
 # define GRAVITY_EARTH 9.80665
 # define POS_HORIZON_EARTH 0.0
 # define POS_VERTICAL_EARTH 0.0
 
 class TestSatellite;
-class TestGps;
 class TestSputnik;
+class TestHubble;
+class TestDreamChaser;
 class TestStarlink;
 class TestDragon;
-class TestHubble;
+class TestGps;
 
 class Satellite
 {
    friend TestSatellite;
-   friend TestGps;
    friend TestSputnik;
+   friend TestHubble;
+   friend TestDreamChaser;
    friend TestStarlink;
    friend TestDragon;
-   friend TestHubble;
+   friend TestGps;
    
 public:
-   Satellite() : position(200.0, 200.0), velocity(0.0, 0.0), dead(false), angularVelocity(1.0), radius(0.0) {}
+   Satellite() : position(200.0, 200.0), velocity(0.0, 0.0), dead(false), angularVelocity(0.0), radius(0.0), age(0) {}
    Satellite(Satellite& s, Angle a);
+   Satellite(Satellite& s, Angle a, double radius);
+   virtual ~Satellite() = default;
    
-   virtual ~Satellite() = default;  // Virtual destructor
-
-   double getRadius() const { return radius;  }
-   bool isDead() const { return dead; }
+   double getRadius()            const { return radius;  }
+   bool isDead()                 const { return dead; }
    const Position& getPosition() const { return position; }
-   void kill() { dead = true; }
-   virtual void draw(ogstream* pgout)                       const = 0;
+   void kill()                         { dead = true; }
+   
+   virtual void draw(ogstream* pgout)                                  const = 0;
    virtual void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) = 0;
    virtual void move(double time);
-   virtual void input() {}
-
+   virtual void input(const Interface* pUI) {};
+   
+private:
    inline double getGravity(double heightAboveEarth)
    {
-      return GRAVITY_EARTH * (RADIUS_EARTH / (RADIUS_EARTH + heightAboveEarth)) * (RADIUS_EARTH / (RADIUS_EARTH + heightAboveEarth));
+      return GRAVITY_EARTH * (RADIUS_EARTH / (RADIUS_EARTH + heightAboveEarth)) *
+      (RADIUS_EARTH / (RADIUS_EARTH + heightAboveEarth));
    }
-
+   
    inline double computeHeightAboveEarth(Position& pos)
    {
-      return sqrt((pos.getMetersX() * pos.getMetersX()) + (pos.getMetersY() * pos.getMetersY())) - RADIUS_EARTH;
+      return sqrt((pos.getMetersX() * pos.getMetersX()) +
+                  (pos.getMetersY() * pos.getMetersY())) - RADIUS_EARTH;
    }
-
+   
    inline double directionOfGravityPull(Position& pos)
    {
-      return atan2(POS_HORIZON_EARTH - pos.getMetersX(), POS_VERTICAL_EARTH - pos.getMetersY());
+      return atan2(POS_HORIZON_EARTH - pos.getMetersX(),
+                   POS_VERTICAL_EARTH - pos.getMetersY());
    }
-
+   
 protected:
    Velocity velocity;
    Position position;
@@ -79,7 +86,8 @@ protected:
    double angularVelocity;
    bool dead;
    double radius;
-
+   int age;
+   
 };
 
 /***************************************************
@@ -108,7 +116,7 @@ public:
    SatelliteDummy() : Satellite() {}
    SatelliteDummy(SatelliteDummy& s, Angle a) : Satellite(s, a) {};
    ~SatelliteDummy() {}
-
+   
    double getRadius()            const { assert(false); return true; }
    bool isDead()                 const { assert(false); return true; }
    const Position& getPosition() const { assert(false); return position; }
@@ -116,4 +124,23 @@ public:
    virtual void draw(ogstream* pgout) const override { assert(false); }
    virtual void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) override { assert(false); }
    virtual void move(double time) override { assert(false); }
+};
+
+
+class Part : public Satellite
+{
+   public:
+   Part(Satellite& whole, Angle & direction) : Satellite(whole, direction) {}
+   Part(Satellite& s, Angle a, double radius) : Satellite(s, a, radius) {} // params can be const
+   ~Part() {}
+};
+
+class Fragment : public Satellite
+{
+public:
+   Fragment(Satellite& whole, const Angle& direction) : Satellite(whole, direction) { angularVelocity = 0.5; radius = 2.0; }
+   ~Fragment() {}
+   void draw(ogstream* pgout) const override;
+   void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) override;
+   void move(double time) override;
 };

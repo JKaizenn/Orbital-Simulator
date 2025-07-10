@@ -1,10 +1,10 @@
 /***********************************************************************
- * Source File:
- *    Starlink
- * Author:
- *    Jessen Forbush & Roger Galan
- * Summary:
- *    The Starlink class
+ * Source File :
+ *Starlink
+ * Author :
+ *Jessen Forbush& Roger Galan
+ * Summary :
+ *The Starlink class
  ************************************************************************/
 
 #include "starlink.h"
@@ -19,7 +19,7 @@
 Starlink::Starlink()
 {
    radius = 6.0;
-   angularVelocity = .05;
+   angularVelocity = 0.05;
    position.setMeters(0.0, -13020000.0);
    velocity.setDxDy(5800.0, 0.0);
 }
@@ -31,17 +31,25 @@ Starlink::Starlink()
  ***************************************************/
 void Starlink::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 {
-   // kill();
+   satellites->push_back(std::make_unique<StarlinkBody>(*this, Angle(90.0), 2.0));
+   satellites->push_back(std::make_unique<StarlinkArray>(*this, Angle(270.0), 4.0));
    
-   // When Starlink breaks up it creates:
-   // - The body drawStarlinkBody() at 2 pixels radius and breaking into 3 fragments
-   // - The right solar array drawStarlinkArray() at 4 pixel radius and breaking into 3 fragments
-   
-   //satellites->push_back(std::make_unique<StarlinkBody>(*this, Angle()));
-   //satellites->push_back(std::make_unique<StarlinkArray>(*this, Angle()));
-   
-   //satellites->push_back(std::make_unique<Fragment>(*this, Angle()));
-   //satellites->push_back(std::make_unique<Fragment>(*this, Angle()));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(45.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(135.0)));
+}
+
+void StarlinkBody::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
+{
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(60.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(120.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(180.0)));
+}
+
+void StarlinkArray::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
+{
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(0.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(240.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(300.0)));
 }
 
 /***************************************************
@@ -53,5 +61,21 @@ void Starlink::draw(ogstream* pgout) const
    if (pgout != nullptr)
    {
       pgout->drawStarlink(position, direction.getRadians());
+   }
+}
+
+void StarlinkBody::draw(ogstream* pgout) const
+{
+   if (pgout != nullptr)
+   {
+      pgout->drawStarlinkBody(position, direction.getRadians());
+   }
+}
+
+void StarlinkArray::draw(ogstream* pgout) const
+{
+   if (pgout != nullptr)
+   {
+      pgout->drawStarlinkArray(position, direction.getRadians());
    }
 }

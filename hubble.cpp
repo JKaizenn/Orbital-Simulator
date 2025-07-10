@@ -7,7 +7,7 @@
  *    The Hubble class
  ************************************************************************/
 
-
+#pragma once
 #include "hubble.h"
 
 /***************************************************
@@ -20,33 +20,88 @@
 Hubble::Hubble()
 {
    radius = 10.0;
-   angularVelocity = .05;
+   angularVelocity = 0.02;
    position.setMeters(0.0, -42164000.0);
    velocity.setDxDy(3100.0, 0.0);
 };
 
 /***************************************************
- * destroy
+ * DESTROY
  * When the Hubble breaks, it creates 4 Parts
  ***************************************************/
 void Hubble::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 {
-   // kill();
-   
-   //satellites->push_back(std::make_unique<HubbleTelescope>(*this, Angle()));
-   //satellites->push_back(std::make_unique<HubbleComputer>(*this, Angle()));
-   //satellites->push_back(std::make_unique<HubbleLeft>(*this, Angle()));
-   //satellites->push_back(std::make_unique<HubbleRight>(*this, Angle()));
+   satellites->push_back(std::make_unique<HubbleTelescope>(*this, Angle(0.0), 10.0));
+   satellites->push_back(std::make_unique<HubbleComputer>(*this, Angle(90.0), 7.0));
+   satellites->push_back(std::make_unique<HubbleLeft>(*this, Angle(180.0), 8.0));
+   satellites->push_back(std::make_unique<HubbleRight>(*this, Angle(270.0), 8.0));
+}
+
+void HubbleTelescope::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
+{
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(0.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(120.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(240.0)));
+}
+
+void HubbleComputer::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
+{
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(0.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(180.0)));
+}
+
+void HubbleLeft::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
+{
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(0.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(180.0)));
+}
+
+void HubbleRight::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
+{
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(0.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(180.0)));
 }
 
 /***************************************************
  * SATELLITE DRAW
- * Draw all the pieces.
+ * Draw the satellite
  ***************************************************/
 void Hubble::draw(ogstream* pgout) const
 {
    if (pgout != nullptr)
    {
-      pgout->drawHubble(position, direction.getRadians());
+      pgout->drawHubble(this->position, this->direction.getRadians());
+   }
+}
+
+void HubbleTelescope::draw(ogstream* pgout) const
+{
+   if (pgout != nullptr)
+   {
+      pgout->drawHubbleTelescope(this->position, this->direction.getRadians());
+   }
+}
+
+void HubbleComputer::draw(ogstream* pgout) const
+{
+   if (pgout != nullptr)
+   {
+      pgout->drawHubbleComputer(this->position, this->direction.getRadians());
+   }
+}
+
+void HubbleLeft::draw(ogstream* pgout) const
+{
+   if (pgout != nullptr)
+   {
+      pgout->drawHubbleLeft(this->position, this->direction.getRadians());
+   }
+}
+
+void HubbleRight::draw(ogstream* pgout) const
+{
+   if (pgout != nullptr)
+   {
+      pgout->drawHubbleRight(this->position, this->direction.getRadians());
    }
 }

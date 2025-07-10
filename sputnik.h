@@ -19,6 +19,6 @@ class Sputnik : public Satellite
 public:
    Sputnik();
    ~Sputnik() {}
-   void draw(ogstream* pgout)  const override;
+   void draw(ogstream* pgout)  const;
    void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) override;
 };

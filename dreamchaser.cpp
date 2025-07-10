@@ -1,4 +1,4 @@
-/*********************************************************************
+/***********************************************************************
  * Source File:
  *    DREAMCHASER
  * Author:
@@ -122,7 +122,10 @@ void Dreamchaser::move(double time)
  ***************************************************/
 void Dreamchaser::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 {
-   // To be implemented
+   kill();
+   for (int i = 0; i < 4; i++) {
+      satellites->push_back(std::make_unique<Fragment>(*this, Angle(60.0 * i)));
+   }
 }
 
 /***************************************************

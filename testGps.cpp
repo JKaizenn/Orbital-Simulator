@@ -160,3 +160,150 @@ void TestGps::defaultConstructor5()
    
    // TEARDOWN
 }
+
+/*************************************
+ * WHOLE GPS DESTROY
+ * input: satellite vector
+ * output: 3 Gps Parts, and 2 Fragments
+ **************************************/
+void TestGps::destroyGps_3Parts2Fragments()
+{
+   // SETUP
+   Gps gps(1.0);
+   gps.direction.radians = M_PI;
+   std::vector<std::unique_ptr<Satellite>> satellites;
+   
+   // EXERCISE
+   gps.destroy(&satellites);
+   
+   // VERIFY
+   assertUnit(satellites.size() == 5); // 3 gps parts, 2 fragments
+   GpsCenter* gc = dynamic_cast<GpsCenter*>(satellites[0].get());
+   GpsLeft* gl = dynamic_cast<GpsLeft*>(satellites[1].get());
+   GpsRight* gr = dynamic_cast<GpsRight*>(satellites[2].get());
+   Fragment* f0 = dynamic_cast<Fragment*>(satellites[3].get());
+   Fragment* f1 = dynamic_cast<Fragment*>(satellites[4].get());
+   assertUnit(gc != nullptr);
+   assertUnit(gl != nullptr);
+   assertUnit(gr != nullptr);
+   assertUnit(f0 != nullptr);
+   assertUnit(f1 != nullptr);
+   assertUnit(gc->direction.radians == M_PI);
+   assertUnit(gl->direction.radians == M_PI);
+   assertUnit(gr->direction.radians == M_PI);
+   assertUnit(f0->direction.radians == M_PI);
+   assertUnit(f1->direction.radians == M_PI);
+   assertUnit(gc->radius == 8.0);
+   assertUnit(gl->radius == 7.0);
+   assertUnit(gr->radius == 7.0);
+   assertUnit(f0->radius == 2.0);
+   assertUnit(f1->radius == 2.0);
+   
+   // TEARDOWN
+   satellites.clear(); // unique_ptr automatically frees memory on destroy
+}
+
+/*************************************
+ * GPS CENTER DESTROY
+ * input: satellite vector
+ * output: 3 Fragments
+ **************************************/
+void TestGps::destroyGpsCenter_3Fragments()
+{
+   // SETUP
+   Gps gps(1);
+   gps.direction.radians = M_PI;
+   GpsCenter gpsCenter(gps, Angle(0.0), 6.0);
+   std::vector<std::unique_ptr<Satellite>> satellites;
+   
+   // EXERCISE
+   gpsCenter.destroy(&satellites);
+   
+   // VERIFY
+   assertUnit(satellites.size() == 3); // 3 fragments
+   Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
+   Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
+   Fragment* f2 = dynamic_cast<Fragment*>(satellites[2].get());
+   assertUnit(f0 != nullptr);
+   assertUnit(f1 != nullptr);
+   assertUnit(f2 != nullptr);
+   assertUnit(f0->direction.radians == M_PI);
+   assertUnit(f1->direction.radians == M_PI);
+   assertUnit(f2->direction.radians == M_PI);
+   assertUnit(f0->radius == 2.0);
+   assertUnit(f1->radius == 2.0);
+   assertUnit(f2->radius == 2.0);
+   
+   // TEARDOWN
+   satellites.clear();
+}
+
+/*************************************
+ * GPS LEFT DESTROY
+ * input: satellite vector
+ * output: 3 Fragments
+ **************************************/
+void TestGps::destroyGpsLeft_3Fragments()
+{
+   // SETUP
+   Gps gps(1);
+   gps.direction.radians = M_PI;
+   GpsLeft gpsLeft(gps, Angle(0.0), 6.0);
+   std::vector<std::unique_ptr<Satellite>> satellites;
+   
+   // EXERCISE
+   gpsLeft.destroy(&satellites);
+   
+   // VERIFY
+   assertUnit(satellites.size() == 3); // 3 fragments
+   Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
+   Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
+   Fragment* f2 = dynamic_cast<Fragment*>(satellites[2].get());
+   assertUnit(f0 != nullptr);
+   assertUnit(f1 != nullptr);
+   assertUnit(f2 != nullptr);
+   assertUnit(f0->direction.radians == M_PI);
+   assertUnit(f1->direction.radians == M_PI);
+   assertUnit(f2->direction.radians == M_PI);
+   assertUnit(f0->radius == 2.0);
+   assertUnit(f1->radius == 2.0);
+   assertUnit(f2->radius == 2.0);
+   
+   // TEARDOWN
+   satellites.clear();
+}
+
+/*************************************
+ * GPS RIGHT DESTROY
+ * input: satellite vector
+ * output: 3 Fragments
+ **************************************/
+void TestGps::destroyGpsRight_3Fragments()
+{
+   // SETUP
+   Gps gps(1);
+   gps.direction.radians = M_PI;
+   GpsRight gpsRight(gps, Angle(0.0), 6.0);
+   std::vector<std::unique_ptr<Satellite>> satellites;
+   
+   // EXERCISE
+   gpsRight.destroy(&satellites);
+   
+   // VERIFY
+   assertUnit(satellites.size() == 3); // 3 fragments
+   Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
+   Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
+   Fragment* f2 = dynamic_cast<Fragment*>(satellites[2].get());
+   assertUnit(f0 != nullptr);
+   assertUnit(f1 != nullptr);
+   assertUnit(f2 != nullptr);
+   assertUnit(f0->direction.radians == M_PI);
+   assertUnit(f1->direction.radians == M_PI);
+   assertUnit(f2->direction.radians == M_PI);
+   assertUnit(f0->radius == 2.0);
+   assertUnit(f1->radius == 2.0);
+   assertUnit(f2->radius == 2.0);
+   
+   // TEARDOWN
+   satellites.clear();
+}

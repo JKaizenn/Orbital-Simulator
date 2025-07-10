@@ -19,7 +19,7 @@
 Dragon::Dragon()
 {
    radius = 7.0;
-   angularVelocity = .05;
+   angularVelocity = 0.05;
    position.setMeters(0.0, 8000000.0);
    velocity.setDxDy(-7900.0, 0.0);
 }
@@ -31,19 +31,32 @@ Dragon::Dragon()
  ***************************************************/
 void Dragon::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 {
-   // kill();
+   satellites->push_back(std::make_unique<DragonCenter>(*this, Angle(0.0), 6.0));
+   satellites->push_back(std::make_unique<DragonLeft>(*this, Angle(120.0), 6.0));
+   satellites->push_back(std::make_unique<DragonRight>(*this, Angle(240.0), 6.0));
    
-   // When Dragon breaks up it creates:
-   // - The center drawCrewDragonCenter() at 6 pixels radius and breaking into 4 fragments
-   // - The left solar array drawCrewDragonLeft() at 6 pixel radius and breaking into 2 fragments
-   // - The right solar array drawCrewDragonRight() at 6 pixel radius and breaking into 2 fragments
-   
-   //satellites->push_back(std::make_unique<DragonCenter>(*this, Angle()));
-   //satellites->push_back(std::make_unique<DragonLeft>(*this, Angle()));
-   //satellites->push_back(std::make_unique<DragonRight>(*this, Angle()));
-   
-   //satellites->push_back(std::make_unique<Fragment>(*this, Angle()));
-   //satellites->push_back(std::make_unique<Fragment>(*this, Angle()));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(60.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(180.0)));
+}
+
+void DragonCenter::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
+{
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(0.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(90.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(180.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(270.0)));
+}
+
+void DragonLeft::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
+{
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(90.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(270.0)));
+}
+
+void DragonRight::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
+{
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(90.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(270.0)));
 }
 
 /***************************************************
@@ -54,6 +67,30 @@ void Dragon::draw(ogstream* pgout) const
 {
    if (pgout != nullptr)
    {
-      pgout->drawCrewDragon(position, direction.getRadians());
+      pgout->drawCrewDragon(this->position, this->direction.getRadians());
+   }
+}
+
+void DragonCenter::draw(ogstream* pgout) const
+{
+   if (pgout != nullptr)
+   {
+      pgout->drawCrewDragonCenter(this->position, this->direction.getRadians());
+   }
+}
+
+void DragonLeft::draw(ogstream* pgout) const
+{
+   if (pgout != nullptr)
+   {
+      pgout->drawCrewDragonLeft(this->position, this->direction.getRadians());
+   }
+}
+
+void DragonRight::draw(ogstream* pgout) const
+{
+   if (pgout != nullptr)
+   {
+      pgout->drawCrewDragonRight(this->position, this->direction.getRadians());
    }
 }

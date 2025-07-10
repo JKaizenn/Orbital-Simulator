@@ -7,6 +7,7 @@
  *    The Sputnik class
  ************************************************************************/
 
+#pragma once
 #include "sputnik.h"
 
 /***************************************************
@@ -21,27 +22,27 @@
 Sputnik::Sputnik()
 {
    radius = 4.0;
-   angularVelocity = .05;
+   angularVelocity = 0.01;
    position.setMeters(-36515095.13, 21082000.0);
    velocity.setDxDy(2050.0, 2684.68);
 };
 
 /***************************************************
- * destroy
+ * DESTROY
  * When Sputnik comes into contact with another
  * element in the simulation it breaks up into 4 fragments.
  ***************************************************/
 void Sputnik::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 {
-   // kill();
-   
-   // for (int i=0; i < 4; i++)
-   //satellites->push_back(std::make_unique<Fragment>(*this, Angle()));
+   kill();
+   for (int i=0; i < 4; i++) {
+      satellites->push_back(std::make_unique<Fragment>(*this, Angle(50.0 * i)));
+   }
 }
 
 /***************************************************
  * SATELLITE DRAW
- * Draw all the pieces.
+ * Draw the satellite
  ***************************************************/
 void Sputnik::draw(ogstream* pgout) const
 {

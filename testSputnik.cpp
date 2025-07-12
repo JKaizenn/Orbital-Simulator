@@ -52,23 +52,23 @@ void TestSputnik::destroySputnik_4Fragments()
    sputnik.destroy(&satellites);
    
    // VERIFY
-   assertUnit(satellites.size() == 4); // 4 fragments
+   assertEquals(satellites.size(), 4); // 4 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
    Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
    Fragment* f2 = dynamic_cast<Fragment*>(satellites[2].get());
    Fragment* f3 = dynamic_cast<Fragment*>(satellites[3].get());
-   assertUnit(f0 != nullptr);
-   assertUnit(f1 != nullptr);
-   assertUnit(f2 != nullptr);
-   assertUnit(f3 != nullptr);
-   assertUnit(f0->direction.radians == M_PI);
-   assertUnit(f1->direction.radians == M_PI);
-   assertUnit(f2->direction.radians == M_PI);
-   assertUnit(f3->direction.radians == M_PI);
-   assertUnit(f0->radius == 2.0);
-   assertUnit(f1->radius == 2.0);
-   assertUnit(f2->radius == 2.0);
-   assertUnit(f3->radius == 2.0);
+   assertEquals(f0 != nullptr, true);
+   assertEquals(f1 != nullptr, true);
+   assertEquals(f2 != nullptr, true);
+   assertEquals(f3 != nullptr, true);
+   assertEquals(f0->direction.radians, M_PI);
+   assertEquals(f1->direction.radians, M_PI);
+   assertEquals(f2->direction.radians, M_PI);
+   assertEquals(f3->direction.radians, M_PI);
+   assertEquals(f0->radius, 2.0);
+   assertEquals(f1->radius, 2.0);
+   assertEquals(f2->radius, 2.0);
+   assertEquals(f3->radius, 2.0);
    
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy

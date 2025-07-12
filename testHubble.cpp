@@ -52,23 +52,23 @@ void TestHubble::destroyHubble_4Parts()
    hub.destroy(&satellites);
    
    // VERIFY
-   assertUnit(satellites.size() == 4); // 4 fragments
+   assertEquals(satellites.size(), 4); // 4 fragments
    HubbleTelescope* ht = dynamic_cast<HubbleTelescope*>(satellites[0].get());
    HubbleComputer* hc = dynamic_cast<HubbleComputer*>(satellites[1].get());
    HubbleLeft* hl = dynamic_cast<HubbleLeft*>(satellites[2].get());
    HubbleRight* hr = dynamic_cast<HubbleRight*>(satellites[3].get());
-   assertUnit(ht != nullptr);
-   assertUnit(hc != nullptr);
-   assertUnit(hl != nullptr);
-   assertUnit(hr != nullptr);
-   assertUnit(ht->direction.radians == M_PI);
-   assertUnit(hc->direction.radians == M_PI);
-   assertUnit(hl->direction.radians == M_PI);
-   assertUnit(hr->direction.radians == M_PI);
-   assertUnit(ht->radius == 10.0);
-   assertUnit(hc->radius == 7.0);
-   assertUnit(hl->radius == 8.0);
-   assertUnit(hr->radius == 8.0);
+   assertEquals(ht != nullptr, true);
+   assertEquals(hc != nullptr, true);
+   assertEquals(hl != nullptr, true);
+   assertEquals(hr != nullptr, true);
+   assertEquals(ht->direction.radians, M_PI);
+   assertEquals(hc->direction.radians, M_PI);
+   assertEquals(hl->direction.radians, M_PI);
+   assertEquals(hr->direction.radians, M_PI);
+   assertEquals(ht->radius, 10.0);
+   assertEquals(hc->radius, 7.0);
+   assertEquals(hl->radius, 8.0);
+   assertEquals(hr->radius, 8.0);
    
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
@@ -91,19 +91,19 @@ void TestHubble::destroyHubbleTelescope_3Fragments()
    hubTelescope.destroy(&satellites);
    
    // VERIFY
-   assertUnit(satellites.size() == 3); // 3 fragments
+   assertEquals(satellites.size(), 3); // 3 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
    Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
    Fragment* f2 = dynamic_cast<Fragment*>(satellites[2].get());
-   assertUnit(f0 != nullptr);
-   assertUnit(f1 != nullptr);
-   assertUnit(f2 != nullptr);
-   assertUnit(f0->direction.radians == M_PI);
-   assertUnit(f1->direction.radians == M_PI);
-   assertUnit(f2->direction.radians == M_PI);
-   assertUnit(f0->radius == 2.0);
-   assertUnit(f1->radius == 2.0);
-   assertUnit(f2->radius == 2.0);
+   assertEquals(f0 != nullptr, true);
+   assertEquals(f1 != nullptr, true);
+   assertEquals(f2 != nullptr, true);
+   assertEquals(f0->direction.radians, M_PI);
+   assertEquals(f1->direction.radians, M_PI);
+   assertEquals(f2->direction.radians, M_PI);
+   assertEquals(f0->radius, 2.0);
+   assertEquals(f1->radius, 2.0);
+   assertEquals(f2->radius, 2.0);
    
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
@@ -126,15 +126,15 @@ void TestHubble::destroyHubbleComputer_2Fragments()
    hubComputer.destroy(&satellites);
    
    // VERIFY
-   assertUnit(satellites.size() == 2); // 2 fragments
+   assertEquals(satellites.size(), 2); // 2 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
    Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
-   assertUnit(f0 != nullptr);
-   assertUnit(f1 != nullptr);
-   assertUnit(f0->direction.radians == M_PI);
-   assertUnit(f1->direction.radians == M_PI);
-   assertUnit(f0->radius == 2.0);
-   assertUnit(f1->radius == 2.0);
+   assertEquals(f0 != nullptr, true);
+   assertEquals(f1 != nullptr, true);
+   assertEquals(f0->direction.radians, M_PI);
+   assertEquals(f1->direction.radians, M_PI);
+   assertEquals(f0->radius, 2.0);
+   assertEquals(f1->radius, 2.0);
    
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
@@ -157,15 +157,15 @@ void TestHubble::destroyHubbleLeft_2Fragments()
    hubLeft.destroy(&satellites);
    
    // VERIFY
-   assertUnit(satellites.size() == 2); // 3 fragments
+   assertEquals(satellites.size(), 2); // 3 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
    Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
-   assertUnit(f0 != nullptr);
-   assertUnit(f1 != nullptr);
-   assertUnit(f0->direction.radians == M_PI);
-   assertUnit(f1->direction.radians == M_PI);
-   assertUnit(f0->radius == 2.0);
-   assertUnit(f1->radius == 2.0);
+   assertEquals(f0 != nullptr, true);
+   assertEquals(f1 != nullptr, true);
+   assertEquals(f0->direction.radians, M_PI);
+   assertEquals(f1->direction.radians, M_PI);
+   assertEquals(f0->radius, 2.0);
+   assertEquals(f1->radius, 2.0);
    
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
@@ -188,15 +188,15 @@ void TestHubble::destroyHubbleRight_2Fragments()
    hubRight.destroy(&satellites);
    
    // VERIFY
-   assertUnit(satellites.size() == 2); // 3 fragments
+   assertEquals(satellites.size(), 2); // 3 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
    Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
-   assertUnit(f0 != nullptr);
-   assertUnit(f1 != nullptr);
-   assertUnit(f0->direction.radians == M_PI);
-   assertUnit(f1->direction.radians == M_PI);
-   assertUnit(f0->radius == 2.0);
-   assertUnit(f1->radius == 2.0);
+   assertEquals(f0 != nullptr, true);
+   assertEquals(f1 != nullptr, true);
+   assertEquals(f0->direction.radians, M_PI);
+   assertEquals(f1->direction.radians, M_PI);
+   assertEquals(f0->radius, 2.0);
+   assertEquals(f1->radius, 2.0);
    
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy

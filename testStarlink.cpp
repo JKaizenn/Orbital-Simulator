@@ -52,30 +52,30 @@ void TestStarlink::destroyStarlink_2Part_2Fragments()
    starlink.destroy(&satellites);
    
    // VERIFY
-   assertUnit(satellites.size() == 4); // 4 fragments
+   assertEquals(satellites.size(), 4); // 2 parts, 2 fragments
    StarlinkBody* sb = dynamic_cast<StarlinkBody*>(satellites[0].get());
    StarlinkArray* sa = dynamic_cast<StarlinkArray*>(satellites[1].get());
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[2].get());
    Fragment* f1 = dynamic_cast<Fragment*>(satellites[3].get());
-   assertUnit(sb != nullptr);
-   assertUnit(sa != nullptr);
-   assertUnit(f0 != nullptr);
-   assertUnit(f1 != nullptr);
-   assertUnit(sb->direction.radians == M_PI);
-   assertUnit(sa->direction.radians == M_PI);
-   assertUnit(f0->direction.radians == M_PI);
-   assertUnit(f1->direction.radians == M_PI);
-   assertUnit(sb->radius == 2.0);
-   assertUnit(sa->radius == 4.0);
-   assertUnit(f0->radius == 2.0);
-   assertUnit(f1->radius == 2.0);
+   assertEquals(sb != nullptr, true);
+   assertEquals(sa != nullptr, true);
+   assertEquals(f0 != nullptr, true);
+   assertEquals(f1 != nullptr, true);
+   assertEquals(sb->direction.radians, M_PI);
+   assertEquals(sa->direction.radians, M_PI);
+   assertEquals(f0->direction.radians, M_PI);
+   assertEquals(f1->direction.radians, M_PI);
+   assertEquals(sb->radius, 2.0);
+   assertEquals(sa->radius, 4.0);
+   assertEquals(f0->radius, 2.0);
+   assertEquals(f1->radius, 2.0);
    
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
 }
 
 /*************************************
- * PART STARLINK BODY DESTROY
+ * STARLINK BODY DESTROY
  * input: satellite vector
  * output: 3 Fragments
  **************************************/
@@ -91,26 +91,26 @@ void TestStarlink::destroyStarlinkBody_3Fragments()
    starlinkBody.destroy(&satellites);
    
    // VERIFY
-   assertUnit(satellites.size() == 3); // 3 fragments
+   assertEquals(satellites.size(), 3); // 3 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
    Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
    Fragment* f2 = dynamic_cast<Fragment*>(satellites[2].get());
-   assertUnit(f0 != nullptr);
-   assertUnit(f1 != nullptr);
-   assertUnit(f2 != nullptr);
-   assertUnit(f0->direction.radians == M_PI);
-   assertUnit(f1->direction.radians == M_PI);
-   assertUnit(f2->direction.radians == M_PI);
-   assertUnit(f0->radius == 2.0);
-   assertUnit(f1->radius == 2.0);
-   assertUnit(f2->radius == 2.0);
+   assertEquals(f0 != nullptr, true);
+   assertEquals(f1 != nullptr, true);
+   assertEquals(f2 != nullptr, true);
+   assertEquals(f0->direction.radians, M_PI);
+   assertEquals(f1->direction.radians, M_PI);
+   assertEquals(f2->direction.radians, M_PI);
+   assertEquals(f0->radius, 2.0);
+   assertEquals(f1->radius, 2.0);
+   assertEquals(f2->radius, 2.0);
    
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
 }
 
 /*************************************
- * PART STARLINK ARRAY DESTROY
+ * STARLINK ARRAY DESTROY
  * input: satellite vector
  * output: 3 Fragments
  **************************************/
@@ -126,19 +126,19 @@ void TestStarlink::destroyStarlinkArray_3Fragments()
    starlinkArray.destroy(&satellites);
    
    // VERIFY
-   assertUnit(satellites.size() == 3); // 3 fragments
+   assertEquals(satellites.size(), 3); // 3 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
    Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
    Fragment* f2 = dynamic_cast<Fragment*>(satellites[2].get());
-   assertUnit(f0 != nullptr);
-   assertUnit(f1 != nullptr);
-   assertUnit(f2 != nullptr);
-   assertUnit(f0->direction.radians == M_PI);
-   assertUnit(f1->direction.radians == M_PI);
-   assertUnit(f2->direction.radians == M_PI);
-   assertUnit(f0->radius == 2.0);
-   assertUnit(f1->radius == 2.0);
-   assertUnit(f2->radius == 2.0);
+   assertEquals(f0 != nullptr, true);
+   assertEquals(f1 != nullptr, true);
+   assertEquals(f2 != nullptr, true);
+   assertEquals(f0->direction.radians, M_PI);
+   assertEquals(f1->direction.radians, M_PI);
+   assertEquals(f2->direction.radians, M_PI);
+   assertEquals(f0->radius, 2.0);
+   assertEquals(f1->radius, 2.0);
+   assertEquals(f2->radius, 2.0);
    
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy

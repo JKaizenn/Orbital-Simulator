@@ -42,9 +42,9 @@ void TestDreamChaser::defaultConstructor()
  * output:  v(121.213, 121.213)
  *********************************************/
 void TestDreamChaser::thrust_once()
-{  // setup
+{
+   // SETUP
    Dreamchaser d;
-   
    d.position.x = 100.0;
    d.position.y = 100.0;
    d.velocity.dx = 100.0;
@@ -53,10 +53,10 @@ void TestDreamChaser::thrust_once()
    double magnitude = 3.0;
    double time = 10.0;
    
-   // exercise
+   // EXERCISE
    d.thrust(magnitude, time);
    
-   // verify
+   // VERIFY
    assertEquals(d.position.x, 100.0);
    assertEquals(d.position.y, 100.0);
    assertEquals(d.velocity.dx, 121.2132034);    // dx = 100 + (3 * sin(45deg) * 10)
@@ -64,7 +64,9 @@ void TestDreamChaser::thrust_once()
    assertEquals(d.direction.radians, M_PI / 4); // 45 degrees
    assertEquals(magnitude, 3.0);
    assertEquals(time, 10.0);
-}  // teardown
+   
+   // TEARDOWN
+}
 
 /*********************************************
  * name:  ROTATE LEFT
@@ -72,38 +74,40 @@ void TestDreamChaser::thrust_once()
  * output: direction = M_PI - 0.5
  *********************************************/
 void TestDreamChaser::rotate_left()
-{  // setup
+{
+   // SETUP
    Dreamchaser d;
    d.direction.radians = M_PI;
    double radians = -0.5;
    
-   // exercise
+   // EXERCISE
    d.rotate(radians);
    
-   // verify
-   assertEquals(d.direction.radians, M_PI -0.5);
+   // VERIFY
+   assertEquals(d.direction.radians, M_PI - 0.5);
    
-   // teardown
+   // TEARDOWN
 }
 
 /*********************************************
  * name:  ROTATE RIGHT
- * input: ship direction = M_PI,  -0.5 radians
- * output: direction = M_PI - 0.5
+ * input: ship direction = M_PI,  0.5 radians
+ * output: direction = M_PI + 0.5
  *********************************************/
 void TestDreamChaser::rotate_right()
-{  // setup
+{
+   // SETUP
    Dreamchaser d;
    d.direction.radians = M_PI;
    double radians = 0.5;
    
-   // exercise
+   // EXERCISE
    d.rotate(radians);
    
-   // verify
+   // VERIFY
    assertEquals(d.direction.radians, M_PI + 0.5);
    
-   // teardown
+   // TEARDOWN
 }
 
 /*********************************************
@@ -112,7 +116,8 @@ void TestDreamChaser::rotate_right()
  * output:  zero
  *********************************************/
 void TestDreamChaser::input_none()
-{  // setup
+{
+   // SETUP
    Dreamchaser d;
    Interface ui; // test dreamchaser is friend of interface class
    ui.isDownPress = 0;
@@ -124,18 +129,20 @@ void TestDreamChaser::input_none()
    d.velocity.dy = 0.0;
    d.direction.radians = 0.0;
    
-   // exercise
+   // EXERCISE
    d.input(&ui);
    
-   // verify
+   // VERIFY
    assertEquals(d.position.x, 0.0);      // did not move
    assertEquals(d.position.y, 0.0);
    assertEquals(d.velocity.dx, 0.0);
    assertEquals(d.velocity.dy, 0.0);
-   assertUnit(ui.isDownPress == 0.0);     // nada happens
-   assertUnit(ui.isLeftPress == 0.0);
-   assertUnit(ui.isRightPress == 0.0);
-}  // teardown
+   assertEquals(ui.isDownPress, 0.0);     // nada happens
+   assertEquals(ui.isLeftPress, 0.0);
+   assertEquals(ui.isRightPress, 0.0);
+   
+   // TEARDOWN
+}
 
 /*********************************************
  * name:    INPUT DOWN
@@ -143,7 +150,8 @@ void TestDreamChaser::input_none()
  * output:  downPress(1)
  *********************************************/
 void TestDreamChaser::input_downKeyPressed()
-{  // setup
+{
+   // SETUP
    Dreamchaser d;
    Interface ui;
    ui.isDownPress = 1;
@@ -155,20 +163,20 @@ void TestDreamChaser::input_downKeyPressed()
    d.velocity.dy = 0.0;
    d.direction.radians = 0.0;
    
-   // exercise
+   // EXERCISE
    d.input(&ui);
    
-   // verify
+   // VERIFY
    assertEquals(d.position.x, 0.0);
    assertEquals(d.position.y, 0.0);
    assertEquals(d.velocity.dx, 0.0);
    assertEquals(d.velocity.dy, 96.0);        // v.dy = 0.0(dy) + 2.0(ddy) * 48.0(t)
    assertEquals(d.direction.radians, 0.0);
-   assertUnit(ui.isDownPress == 1);          // down arrow pressed
-   assertUnit(ui.isLeftPress == 0);
-   assertUnit(ui.isRightPress == 0);
+   assertEquals(ui.isDownPress, 1);          // down arrow pressed
+   assertEquals(ui.isLeftPress, 0);
+   assertEquals(ui.isRightPress, 0);
    
-   // teardown
+   // TEARDOWN
    ui.isDownPress = 0.0;
 }
 
@@ -178,7 +186,8 @@ void TestDreamChaser::input_downKeyPressed()
  * output: d(2PI - 0.1 radians)
  *********************************************/
 void TestDreamChaser::input_leftKeyPressed()
-{  // setup
+{
+   // SETUP
    Dreamchaser d;
    Interface ui;
    ui.isDownPress = 0;
@@ -190,20 +199,20 @@ void TestDreamChaser::input_leftKeyPressed()
    d.velocity.dy = 0.0;
    d.direction.radians = 0.0;
    
-   // exercise
+   // EXERCISE
    d.input(&ui);
    
-   // verify
+   // VERIFY
    assertEquals(d.position.x, 0.0);
    assertEquals(d.position.y, 0.0);
    assertEquals(d.velocity.dx, 0.0);
    assertEquals(d.velocity.dy, 0.0);
    assertEquals(d.direction.radians, M_PI + M_PI - 0.1); // 2PI - 0.1rad
-   assertUnit(ui.isDownPress == 0);
-   assertUnit(ui.isLeftPress == 1); // left arrow pressed
-   assertUnit(ui.isRightPress == 0);
+   assertEquals(ui.isDownPress, 0);
+   assertEquals(ui.isLeftPress, 1); // left arrow pressed
+   assertEquals(ui.isRightPress, 0);
    
-   // teardown
+   // TEARDOWN
    ui.isLeftPress = 0.0;
 }
 
@@ -213,7 +222,8 @@ void TestDreamChaser::input_leftKeyPressed()
  * output:  d=(0.1)
  *********************************************/
 void TestDreamChaser::input_rightKeyPressed()
-{  // setup
+{
+   // SETUP
    Dreamchaser d;
    Interface ui;
    ui.isDownPress = 0;
@@ -225,19 +235,19 @@ void TestDreamChaser::input_rightKeyPressed()
    d.velocity.dy = 0.0;
    d.direction.radians = 0.0;
    
-   // exercise
+   // EXERCISE
    d.input(&ui);
    
-   // verify
+   // VERIFY
    assertEquals(d.position.x, 0.0);
    assertEquals(d.position.y, 0.0);
    assertEquals(d.velocity.dx, 0.0);
    assertEquals(d.velocity.dy, 0.0);
    assertEquals(d.direction.radians, 0.1); // right rotation
-   assertUnit(ui.isDownPress == 0);
-   assertUnit(ui.isLeftPress == 0);
-   assertUnit(ui.isRightPress == 1); // right arrow pressed
+   assertEquals(ui.isDownPress, 0);
+   assertEquals(ui.isLeftPress, 0);
+   assertEquals(ui.isRightPress, 1); // right arrow pressed
    
-   // teardown
+   // TEARDOWN
    ui.isRightPress = 0.0;
 }

@@ -29,10 +29,13 @@ Satellite::Satellite(Satellite& s, Angle a)
 #ifndef NDEBUG // testing purposes
    randSpeed = 1000.0;
 #endif
+   
+   // The kick velocity should use the satellite's direction, not the angle parameter
    Velocity kickVel;
-   kickVel.set(a, randSpeed);
+   kickVel.set(direction, randSpeed);  // Use direction instead of a
    velocity.addV(kickVel);
    
+   // The position offset uses the angle parameter for direction of separation
    Position kickPos;
    kickPos.setPixelsX(20.0 * sin(a.getRadians())); // adjust the 20 = pixel pos
    kickPos.setPixelsY(20.0 * cos(a.getRadians()));
@@ -40,11 +43,14 @@ Satellite::Satellite(Satellite& s, Angle a)
    position.addMetersY(kickPos.getMetersY());
 }
 
+/******************************************
+ * SATELLITE : CONSTRUCTOR WITH SATELLITE, ANGLE, AND RADIUS
+ * Initialize satellite by copying from another with specified radius
+ *****************************************/
 Satellite::Satellite(Satellite& s, Angle a, double radius) : Satellite(s, a)
 {
    this->radius = radius;
 }
-
 
 /******************************************
  * SATELLITE : MOVE
@@ -79,14 +85,28 @@ void Satellite::move(double time)
    age++;
 }
 
-void Fragment::draw(ogstream* pgout)  const
+/******************************************
+ * FRAGMENT : DRAW
+ * Draw a fragment on the screen
+ *****************************************/
+void Fragment::draw(ogstream* pgout) const
 {
    pgout->drawFragment(position, direction.getRadians());
 }
+
+/******************************************
+ * FRAGMENT : DESTROY
+ * Handle fragment destruction
+ *****************************************/
 void Fragment::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 {
    
 }
+
+/******************************************
+ * FRAGMENT : MOVE
+ * Move fragment and handle expiration
+ *****************************************/
 void Fragment::move(double time)
 {
    Satellite::move(time);

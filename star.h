@@ -18,14 +18,14 @@
 #include "position.h"  // For Position
 #include "uiDraw.h"    // For ogstream, drawStar, and random()
 
- /************************************************************
-  * STAR
-  *
-  * Represents a single twinkling star in the simulation.
-  * This class encapsulates the star's position and twinkle phase,
-  * and it updates its appearance each time it is drawn.
-  * The star is designed to be displayed only in the sky.
-  ************************************************************/
+/************************************************************
+ * STAR
+ *
+ * Represents a single twinkling star in the simulation.
+ * This class encapsulates the star's position and twinkle phase,
+ * and it updates its appearance each time it is drawn.
+ * The star is designed to be displayed only in the sky.
+ ************************************************************/
 class Star {
 public:
    // Default Constructor
@@ -34,30 +34,29 @@ public:
       // Set the phase to be a random value between 0 and 255.
       phase = random(0, 255);
    }
-
+   
    // Reset the star using the upper-right corner.
    void reset(const Position& posUpperRight) {
-      double width = posUpperRight.getX();
-      double height = posUpperRight.getY();
-
+      double width = posUpperRight.getPixelsX();
+      double height = posUpperRight.getPixelsY();
+      
       // Randomize x anywhere from 0 to width.
-      position.setX(random(0.0, width));
-
-      // Randomize y anywhere from 0 to height.
-      position.setY(random(height / 2.0, height));
+      position.setPixelsX(random(0.0, width));
+      
+      // Randomize y anywhere from height/2 to height (sky area only).
+      position.setPixelsY(random(height / 2.0, height));
    }
-
-
+   
    // Draw the star.
    void draw(ogstream& gout)
    {
-      // Initialize the phase
+      // Increment the phase for twinkling
       phase++;
-
+      
       // Draw the star using the current phase.
       gout.drawStar(position, phase);
    }
-
+   
 private:
    Position position;      // The star's position.
    unsigned char phase;    // Current twinkle phase.
@@ -79,13 +78,13 @@ public:
       this->count = count;
       stars = new Star[count];
    }
-
+   
    // Destructor: free the allocated array.
    ~Stars()
    {
       delete[] stars;
    }
-
+   
    // Reset all stars using the upper-right corner (screen dimensions).
    void resetAll(const Position& posUpperRight)
    {
@@ -94,7 +93,7 @@ public:
          stars[i].reset(posUpperRight);
       }
    }
-
+   
    // Draw all stars.
    void drawAll(ogstream& gout)
    {
@@ -103,7 +102,7 @@ public:
          stars[i].draw(gout);
       }
    }
-
+   
 private:
    Star* stars;         // Dynamically allocated array of Star objects.
    unsigned int count;  // Number of stars.

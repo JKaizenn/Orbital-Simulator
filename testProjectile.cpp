@@ -2,7 +2,7 @@
  * Source File:
  *    TEST PROJECTILE
  * Author:
- *    Jessen Forbush & Roger Galan
+ *    [Your Name]
  * Summary:
  *    The unit tests for Projectile
  ************************************************************************/
@@ -39,7 +39,7 @@ void TestProjectile::defaultConstructor()
 
 /*************************************
  * CONSTRUCTOR WITH SHIP DATA
- * input: ship at (100px, 200px), pointing right (pi/2), velocity (1000, 500)
+ * input: ship at (100px, 200px), pointing right (π/2), velocity (1000, 500)
  * output: projectile 19px in front of ship with ship velocity + 9000 m/s in ship direction
  **************************************/
 void TestProjectile::constructorWithShipData()
@@ -100,8 +100,8 @@ void TestProjectile::move_normal()
    
    // VERIFY
    // Position should have changed due to velocity and gravity
-   assertUnit(p.position.x != initialX);
-   assertUnit(p.position.y != initialY);
+   assertEquals(p.position.x != initialX, true);
+   assertEquals(p.position.y != initialY, true);
    
    // Age should have incremented
    assertEquals(p.age, 31);
@@ -172,7 +172,7 @@ void TestProjectile::destroy()
    
    // VERIFY
    assertEquals(p.dead, true);
-   assertUnit(satellites.size() == initialSize); // No fragments created
+   assertEquals(satellites.size() == initialSize, true); // No fragments created
    
    // TEARDOWN
 }
@@ -238,11 +238,11 @@ void TestProjectile::multipleProjectiles()
    
    // VERIFY
    // Projectiles should be independent
-   assertUnit(p1.position.x != p2.position.x);
-   assertUnit(p1.position.y != p2.position.y);
-   assertUnit(p1.velocity.dx != p2.velocity.dx);
-   assertUnit(p1.velocity.dy != p2.velocity.dy);
-   assertUnit(p1.direction.radians != p2.direction.radians);
+   assertEquals(p1.position.x != p2.position.x, true);
+   assertEquals(p1.position.y != p2.position.y, true);
+   assertEquals(p1.velocity.dx != p2.velocity.dx, true);
+   assertEquals(p1.velocity.dy != p2.velocity.dy, true);
+   assertEquals(p1.direction.radians != p2.direction.radians, true);
    
    // Both should be alive
    assertEquals(p1.dead, false);

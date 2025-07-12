@@ -2,7 +2,7 @@
  * 1. Name:
  *      Sim
  * 2. Assignment Name:
- *      Lab 09: Orbit Simulator
+ *      Lab 12: Orbit Parts and Fragments
  *
  * Edited by:
  *      Roger Galan & Jessen Forbush
@@ -21,6 +21,8 @@
 #include "hubble.h"
 #include "dragon.h"
 #include "starlink.h"
+#include "star.h"       // Add the stars header
+#include "projectile.h" // Add the projectile header
 
 
 using namespace std;
@@ -33,7 +35,7 @@ class Sim
 {
    public:
    Sim(Position ptUpperRight) :
-   ptUpperRight(ptUpperRight)
+   ptUpperRight(ptUpperRight), stars(50)  // Initialize 50 stars
    {
       frameRate = 30.0;
       hoursPerDay = 24.0;
@@ -44,7 +46,10 @@ class Sim
       radiansInOneDay = -2.0 * M_PI;
       radiansPerFrame = (radiansInOneDay / frameRate) * (timeDilation / secondsPerDay);
       
-      // spawn stars later on not ready
+      // Initialize stars with screen dimensions
+      stars.resetAll(ptUpperRight);
+      
+      // spawn satellites
       satellites.push_back(make_unique<Dreamchaser>());
       for (int i = 0; i < 6; i++) {
          satellites.push_back(make_unique<Gps>(i));
@@ -67,6 +72,7 @@ class Sim
    
    Position ptUpperRight;
    Earth earth;
+   Stars stars;  // Add stars member variable
    
    double frameRate;
    double hoursPerDay;
@@ -168,10 +174,13 @@ void Sim::move()
 
 /*************************************************************************
  * DRAW
- * Displays all game objects and the Earth.
+ * Displays all game objects, stars, and the Earth.
  *************************************************************************/
 void Sim::draw(ogstream* pgout)
 {
+   // Draw stars first (background)
+   stars.drawAll(*pgout);
+   
    // Draw Earth
    earth.draw(pgout, radiansPerFrame);
    
@@ -215,8 +224,7 @@ void callBack(const Interface* pUI, void* p)
    ogstream gout(pSim->earth.getPosition());
    ogstream *pgout = &gout;
    
-   // draw a single star
-   //gout.drawStar(pDemo->ptStar, pDemo->phaseStar);
+   // draw everything using the Sim's draw method
    pSim->draw(pgout);
 }
 

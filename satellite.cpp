@@ -32,7 +32,7 @@ Satellite::Satellite(Satellite& s, Angle a)
    
    // The kick velocity should use the satellite's direction, not the angle parameter
    Velocity kickVel;
-   kickVel.set(direction, randSpeed);  // Use direction instead of a
+   kickVel.set(a, randSpeed);
    velocity.addV(kickVel);
    
    // The position offset uses the angle parameter for direction of separation

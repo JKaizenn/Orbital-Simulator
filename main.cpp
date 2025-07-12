@@ -1,8 +1,6 @@
 /*************************************************************
  * 1. Name:
- *      Sim
- * 2. Assignment Name:
- *      Lab 12: Orbit Parts and Fragments
+ *      Main
  *
  * Edited by:
  *      Roger Galan & Jessen Forbush
@@ -11,7 +9,7 @@
 #include <cassert>      // for ASSERT
 #include "uiInteract.h" // for INTERFACE
 #include "uiDraw.h"     // for RANDOM and DRAW*
-#include "position.h"      // for POINT
+#include "position.h"   // for POINT
 #include "test.h"
 #include "earth.h"
 #include "satellite.h"

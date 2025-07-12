@@ -59,10 +59,10 @@ void TestSatellite::constructorWithPosition()
    SatelliteDerived s2(s1, a);
    
    // VERIFY
-   assertEquals(s2.position.x, 900.0);      // 20px(kickPos: 20px * sin(PI/2) * 40m(1px=40m) = 800m + 100m = 900m
-   assertEquals(s2.position.y, 150.0);
-   assertEquals(s2.velocity.dx, 5.0);        // 0(kickspeed: 1k * sin(PI) + 5
-   assertEquals(s2.velocity.dy, -990.0);     // -1000(kickspeed: 1k * cos(PI) + 10(curr speed)
+   assertEquals(s2.position.x, 900.0);      // kickPos: 20px * sin(PI/2) * 40m = 800m + 100m = 900m
+   assertEquals(s2.position.y, 150.0);     // kickPos: 20px * cos(PI/2) * 40m = 0m + 150m = 150m
+   assertEquals(s2.velocity.dx, 1005.0);   // kickVel: 1000 * sin(PI/2) + 5 = 1000 + 5 = 1005
+   assertEquals(s2.velocity.dy, 10.0);     // kickVel: 1000 * cos(PI/2) + 10 = 0 + 10 = 10
    assertEquals(s2.angularVelocity, 2.5);
    assertEquals(s2.direction.radians, M_PI); // PI = 180 degrees
    assertEquals(s2.dead, false);
@@ -74,7 +74,9 @@ void TestSatellite::constructorWithPosition()
    assertEquals(s1.velocity.dx, 5.0);
    assertEquals(s1.velocity.dy, 10.0);
    assertEquals(s1.angularVelocity, 2.5);
-   assertEquals(a.radians, M_PI / 2.0);             // PI/2 = 90 degrees
+   assertEquals(s1.direction.radians, M_PI); // PI = 180 degrees
+   assertEquals(s1.dead, false);
+   assertEquals(s1.radius, 0.0);
    
    // TEARDOWN
 }

@@ -133,11 +133,11 @@ void TestDreamChaser::input_none()
    d.input(&ui);
    
    // VERIFY
-   assertEquals(d.position.x, 0.0);      // did not move
+   assertEquals(d.position.x, 0.0);     
    assertEquals(d.position.y, 0.0);
    assertEquals(d.velocity.dx, 0.0);
    assertEquals(d.velocity.dy, 0.0);
-   assertEquals(ui.isDownPress, 0.0);     // nada happens
+   assertEquals(ui.isDownPress, 0.0);
    assertEquals(ui.isLeftPress, 0.0);
    assertEquals(ui.isRightPress, 0.0);
    

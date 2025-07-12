@@ -9,6 +9,7 @@
 
 #include "dreamchaser.h"
 #include "acceleration.h"
+#include "projectile.h"
 #include "uiDraw.h"
 
 /***************************************************
@@ -95,11 +96,18 @@ void Dreamchaser::rotate(double radians)
 /***************************************************
  * FIRE PROJECTILE
  * Launch a projectile from the front of the ship
- * Will be implemented in future labs when Projectile class is available
  ***************************************************/
+
 void Dreamchaser::fireProjectile(std::vector<std::unique_ptr<Satellite>>* satellites)
 {
-   // To be implemented
+   if (satellites != nullptr && !isDead())
+   {
+      // Create a new projectile with the ship's current state
+      auto projectile = std::make_unique<Projectile>(position, direction, velocity);
+      
+      // Add the projectile to the satellite vector
+      satellites->push_back(std::move(projectile));
+   }
 }
 
 /***************************************************
@@ -118,7 +126,6 @@ void Dreamchaser::move(double time)
 /***************************************************
  * DESTROY
  * When the DreamChaser is destroyed
- * Will be implemented in future labs when Fragment class is available
  ***************************************************/
 void Dreamchaser::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 {

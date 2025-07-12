@@ -7,7 +7,6 @@
  *    base class for every moving and destroyable object
  ************************************************************************/
 
-#pragma once
 #include "satellite.h"
 #include "acceleration.h"
 
@@ -31,7 +30,7 @@ Satellite::Satellite(Satellite& s, Angle a)
    randSpeed = 1000.0;
 #endif
    Velocity kickVel;
-   kickVel.set(direction, randSpeed);
+   kickVel.set(a, randSpeed);
    velocity.addV(kickVel);
    
    Position kickPos;
@@ -88,7 +87,6 @@ void Fragment::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 {
    
 }
-
 void Fragment::move(double time)
 {
    Satellite::move(time);

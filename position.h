@@ -22,6 +22,7 @@ class TestHubble;
 class TestStarlink;
 class TestDragon;
 class TestDreamChaser;
+class TestProjectile;
 class Acceleration;
 class Velocity;
 
@@ -40,6 +41,7 @@ public:
    friend TestStarlink;
    friend TestDragon;
    friend TestDreamChaser;
+   friend TestProjectile;
    
    // constructors
    Position()            : x(0.0), y(0.0)  {}

@@ -25,7 +25,7 @@ class Earth
 {
    friend TestSatellite;
 public:
-   Earth() : position(0.0, 0.0), direction(0.0), angularVelocity(1.0), radius(0.0) {}
+   Earth() : position(0.0, 0.0), direction(0.0), angularVelocity(1.0), radius(RADIUS_EARTH) {}
    virtual ~Earth() = default;
    
    double getRadius()            const { return radius; }

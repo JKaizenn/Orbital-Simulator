@@ -19,7 +19,7 @@ class Hubble : public Satellite
 public:
    Hubble();
    ~Hubble() {}
-   void draw(ogstream* pgout)  const;
+   void draw(ogstream* pgout)  const override;
    void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) override;
 };
 
@@ -29,7 +29,7 @@ public:
    HubbleTelescope(Satellite& whole, const Angle& direction, double radius) : Part(whole, direction, radius) {}
    //HubbleTelescope(Satellite& whole, const Angle& direction) : Satellite(whole, direction) {}
    ~HubbleTelescope() {}
-   void draw(ogstream* pgout)  const;
+   void draw(ogstream* pgout)  const override;
    void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) override;
 };
 
@@ -39,7 +39,7 @@ public:
    HubbleComputer(Satellite& whole, const Angle& direction, double radius) : Part(whole, direction, radius) {}
    //HubbleComputer(Satellite& whole, const Angle& direction) : Satellite(whole, direction) {}
    ~HubbleComputer() {}
-   void draw(ogstream* pgout)  const;
+   void draw(ogstream* pgout)  const override;
    void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) override;
 };
 
@@ -49,7 +49,7 @@ public:
    HubbleLeft(Satellite& whole, const Angle& direction, double radius) : Part(whole, direction, radius) {}
    //HubbleLeft(Satellite& whole, const Angle& direction) : Satellite(whole, direction) {}
    ~HubbleLeft() {}
-   void draw(ogstream* pgout)  const;
+   void draw(ogstream* pgout)  const override;
    void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) override;
 };
 
@@ -59,6 +59,6 @@ public:
    HubbleRight(Satellite& whole, const Angle& direction, double radius) : Part(whole, direction, radius) {}
    //HubbleRight(Satellite& whole, const Angle& direction) : Satellite(whole, direction) {}
    ~HubbleRight() {}
-   void draw(ogstream* pgout)  const;
+   void draw(ogstream* pgout)  const override;
    void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) override;
 };

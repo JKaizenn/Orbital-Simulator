@@ -25,6 +25,8 @@
 		BB676AD92E0C39F200AC3E02 /* dreamchaser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB676AD82E0C39EF00AC3E02 /* dreamchaser.cpp */; };
 		BB91F9F22E03918E002C2959 /* gps.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB91F9F12E03918C002C2959 /* gps.cpp */; };
 		BBA5B4912E0D96EB00FAB6CB /* starlink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBA5B4902E0D96E800FAB6CB /* starlink.cpp */; };
+		BBFD7E492E203DE800A7DA7A /* projectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBFD7E482E203DE600A7DA7A /* projectile.cpp */; };
+		BBFD7E4C2E20403000A7DA7A /* testProjectile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BBFD7E4B2E20402800A7DA7A /* testProjectile.cpp */; };
 		C11C7EA425780B2100EA4B2E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11C7EA225780B2100EA4B2E /* GLUT.framework */; };
 		C11C7EA525780B2100EA4B2E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11C7EA325780B2100EA4B2E /* OpenGL.framework */; };
 		C11C7EB125780B6500EA4B2E /* orbit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C11C7EA625780B5C00EA4B2E /* orbit.cpp */; };
@@ -88,6 +90,10 @@
 		BB91F9F12E03918C002C2959 /* gps.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gps.cpp; sourceTree = "<group>"; };
 		BBA5B48F2E0D96E200FAB6CB /* starlink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = starlink.h; sourceTree = "<group>"; };
 		BBA5B4902E0D96E800FAB6CB /* starlink.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = starlink.cpp; sourceTree = "<group>"; };
+		BBFD7E472E203DE000A7DA7A /* projectile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = projectile.h; sourceTree = "<group>"; };
+		BBFD7E482E203DE600A7DA7A /* projectile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = projectile.cpp; sourceTree = "<group>"; };
+		BBFD7E4A2E20402200A7DA7A /* testProjectile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = testProjectile.h; sourceTree = "<group>"; };
+		BBFD7E4B2E20402800A7DA7A /* testProjectile.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = testProjectile.cpp; sourceTree = "<group>"; };
 		C11C7E962578098A00EA4B2E /* Lab09 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lab09; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11C7EA225780B2100EA4B2E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C11C7EA325780B2100EA4B2E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -128,6 +134,7 @@
 				BB676AD12E0C398F00AC3E02 /* hubble.cpp */,
 				C11C7EA625780B5C00EA4B2E /* orbit.cpp */,
 				C179C6C027E375AF00E3E514 /* position.cpp */,
+				BBFD7E482E203DE600A7DA7A /* projectile.cpp */,
 				BB1169EB2E0201F9004DFA67 /* satellite.cpp */,
 				BB676AD42E0C39B100AC3E02 /* sputnik.cpp */,
 				BBA5B4902E0D96E800FAB6CB /* starlink.cpp */,
@@ -137,6 +144,7 @@
 				BB65126F2E0DF19C0008310B /* testDreamChaser.cpp */,
 				BB395ECB2E0E1E8600869B33 /* testGps.cpp */,
 				BB65126C2E0DF1880008310B /* testHubble.cpp */,
+				BBFD7E4B2E20402800A7DA7A /* testProjectile.cpp */,
 				BB1169F52E0207C2004DFA67 /* testSatellite.cpp */,
 				BB6512692E0DF1750008310B /* testSputnik.cpp */,
 				BB6512662E0DF15A0008310B /* testStarlink.cpp */,
@@ -152,6 +160,7 @@
 				BB676AD32E0C399900AC3E02 /* hubble.h */,
 				BB5C988D2DF1E918009599D7 /* physics.h */,
 				C179C6C227E375D600E3E514 /* position.h */,
+				BBFD7E472E203DE000A7DA7A /* projectile.h */,
 				BB1169EA2E0201F4004DFA67 /* satellite.h */,
 				BB676AD62E0C39C400AC3E02 /* sputnik.h */,
 				BB1169EE2E020383004DFA67 /* star.h */,
@@ -164,6 +173,7 @@
 				BB395ECA2E0E1E8000869B33 /* testGps.h */,
 				BB65126B2E0DF1790008310B /* testHubble.h */,
 				C11C7EAF25780B6500EA4B2E /* testPosition.h */,
+				BBFD7E4A2E20402200A7DA7A /* testProjectile.h */,
 				BB1169ED2E02028E004DFA67 /* testSatellite.h */,
 				BB6512682E0DF1600008310B /* testSputnik.h */,
 				BB6512652E0DF1510008310B /* testStarlink.h */,
@@ -257,6 +267,7 @@
 				C11C7EB125780B6500EA4B2E /* orbit.cpp in Sources */,
 				BB1169F62E0207CA004DFA67 /* testSatellite.cpp in Sources */,
 				BB676AD92E0C39F200AC3E02 /* dreamchaser.cpp in Sources */,
+				BBFD7E4C2E20403000A7DA7A /* testProjectile.cpp in Sources */,
 				BB1169EC2E0201FC004DFA67 /* satellite.cpp in Sources */,
 				BB1AEEE52E0B5C7200B47C58 /* dragon.cpp in Sources */,
 				C11C7EB225780B6500EA4B2E /* test.cpp in Sources */,
@@ -267,6 +278,7 @@
 				BBA5B4912E0D96EB00FAB6CB /* starlink.cpp in Sources */,
 				BB676AD52E0C39B800AC3E02 /* sputnik.cpp in Sources */,
 				BB5C98962DF1E9C7009599D7 /* angle.cpp in Sources */,
+				BBFD7E492E203DE800A7DA7A /* projectile.cpp in Sources */,
 				BB5C98902DF1E9A4009599D7 /* velocity.cpp in Sources */,
 				BB6512702E0DF19D0008310B /* testDreamChaser.cpp in Sources */,
 				BB6512672E0DF15D0008310B /* testStarlink.cpp in Sources */,

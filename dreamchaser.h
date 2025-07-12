@@ -30,7 +30,7 @@ public:
    // Satellite Virtual Functions
    void draw(ogstream* pgout) const override;
    void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) override;
-   void input(const Interface* pUI);
+   void input(const Interface* pUI) override;
    void move(double time) override;
    
    // DreamChaser specific methods

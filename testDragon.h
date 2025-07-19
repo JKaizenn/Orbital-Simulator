@@ -1,4 +1,4 @@
-/***********************************************************************
+   /***********************************************************************
  * Header File:
  *    Test Dragon : Test the Dragon class
  * Author:
@@ -11,14 +11,14 @@
 #include "dragon.h"
 #include "unitTest.h"
 
-/***************************************************
- * DRAGON TEST
- * Test the Dragon class
- ***************************************************/
+ /***************************************************
+  * DRAGON TEST
+  * Test the Dragon class
+  ***************************************************/
 class TestDragon : public UnitTest
 {
 public:
-   
+
    void run()
    {
       // Constructor Tests
@@ -27,10 +27,10 @@ public:
       destroyDragonCenter_4Fragments();
       destroyDragonLeft_2Fragments();
       destroyDragonRight_2Fragments();
-      
+
       report("Dragon");
    }
-   
+
 private:
    // Constructor Tests
    void defaultConstructor();
@@ -38,6 +38,6 @@ private:
    void destroyDragonCenter_4Fragments();
    void destroyDragonLeft_2Fragments();
    void destroyDragonRight_2Fragments();
-   
-   
+
+
 };

@@ -3,6 +3,8 @@
  *    UI INTERFACE
  * Author:
  *    Br. Helfrich
+ * Edited By:
+ *    Roger Galan & Jessen Forbush
  * Summary:
  *    This module will create an OpenGL window,
  *    enter the OpenGL main loop, and accept events.
@@ -23,8 +25,8 @@ using std::max;
 
 #define GL_SILENCE_DEPRECATION
 
-
 class TestDreamChaser;
+
 /********************************************
  * INTERFACE
  * All the data necessary to keep our graphics

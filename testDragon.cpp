@@ -11,18 +11,18 @@
 #include "testDragon.h"
 #include <math.h>
 
-/*************************************
- * DEFAULT CONSTRUCTOR
- * input: nothing
- * output: position (0.0, 8000000.0), velocity (-7900.0, 0.0), dead(false), angularVelocity(0.05), radius(7.0)
- **************************************/
+ /*************************************
+  * DEFAULT CONSTRUCTOR
+  * input: nothing
+  * output: position (0.0, 8000000.0), velocity (-7900.0, 0.0), dead(false), angularVelocity(0.05), radius(7.0)
+  **************************************/
 void TestDragon::defaultConstructor()
 {
    // SETUP
-   
+
    // EXERCISE
    Dragon d;
-   
+
    // VERIFY
    assertEquals(d.position.x, 0.0);
    assertEquals(d.position.y, 8000000.0);
@@ -32,7 +32,7 @@ void TestDragon::defaultConstructor()
    assertEquals(d.angularVelocity, 0.05);
    assertEquals(d.radius, 7.0);
    assertEquals(d.direction.radians, 0.0);
-   
+
    // TEARDOWN
 }
 
@@ -47,10 +47,10 @@ void TestDragon::destroyDragon_3Parts_2Fragments()
    Dragon dragon;
    dragon.direction.radians = M_PI;
    std::vector<std::unique_ptr<Satellite>> satellites;
-   
+
    // EXERCISE
    dragon.destroy(&satellites);
-   
+
    // VERIFY
    assertEquals(satellites.size(), 5); // 3 parts, 2 fragments
    DragonCenter* dc = dynamic_cast<DragonCenter*>(satellites[0].get());
@@ -73,7 +73,7 @@ void TestDragon::destroyDragon_3Parts_2Fragments()
    assertEquals(dr->radius, 6.0);
    assertEquals(f0->radius, 2.0);
    assertEquals(f1->radius, 2.0);
-   
+
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
 }
@@ -90,10 +90,10 @@ void TestDragon::destroyDragonCenter_4Fragments()
    dragon.direction.radians = M_PI;
    DragonCenter dragonCenter(dragon, Angle(0.0), 6.0);
    std::vector<std::unique_ptr<Satellite>> satellites;
-   
+
    // EXERCISE
    dragonCenter.destroy(&satellites);
-   
+
    // VERIFY
    assertEquals(satellites.size(), 4); // 4 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
@@ -112,7 +112,7 @@ void TestDragon::destroyDragonCenter_4Fragments()
    assertEquals(f1->radius, 2.0);
    assertEquals(f2->radius, 2.0);
    assertEquals(f3->radius, 2.0);
-   
+
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
 }
@@ -129,10 +129,10 @@ void TestDragon::destroyDragonLeft_2Fragments()
    dragon.direction.radians = M_PI;
    DragonLeft dragonLeft(dragon, Angle(0.0), 6.0);
    std::vector<std::unique_ptr<Satellite>> satellites;
-   
+
    // EXERCISE
    dragonLeft.destroy(&satellites);
-   
+
    // VERIFY
    assertEquals(satellites.size(), 2); // 2 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
@@ -143,7 +143,7 @@ void TestDragon::destroyDragonLeft_2Fragments()
    assertEquals(f1->direction.radians, M_PI);
    assertEquals(f0->radius, 2.0);
    assertEquals(f1->radius, 2.0);
-   
+
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
 }
@@ -160,10 +160,10 @@ void TestDragon::destroyDragonRight_2Fragments()
    dragon.direction.radians = M_PI;
    DragonRight dragonRight(dragon, Angle(0.0), 6.0);
    std::vector<std::unique_ptr<Satellite>> satellites;
-   
+
    // EXERCISE
    dragonRight.destroy(&satellites);
-   
+
    // VERIFY
    assertEquals(satellites.size(), 2); // 2 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
@@ -174,7 +174,7 @@ void TestDragon::destroyDragonRight_2Fragments()
    assertEquals(f1->direction.radians, M_PI);
    assertEquals(f0->radius, 2.0);
    assertEquals(f1->radius, 2.0);
-   
+
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
 }

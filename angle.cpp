@@ -2,21 +2,19 @@
  * Source File:
  *    ANGLE
  * Author:
- *    Br. Helfrich
+ *    Jessen Forbush & Roger Galan Manzano
  * Summary:
  *    Everything we need to know about a direction
  ************************************************************************/
 
 #include "angle.h"
-#include <math.h>
+#include <math.h>  // for floor()
 #include <cassert>
 using namespace std;
 
-/**********************************************
- * ANGLE :: NORMALIZE
- * Ensures that the given angle in radians is
- * within the standard range (0, 2pi).
- **********************************************/
+/************************************
+ * ANGLE : NORMALIZE
+ ************************************/
 double Angle::normalize(double radians) const
 {
    // Define a constant for 2pi (full circle in radians)
@@ -32,3 +30,5 @@ double Angle::normalize(double radians) const
    assert(0.0 <= radians && radians <= TWO_PI);
    return radians;
 }
+
+

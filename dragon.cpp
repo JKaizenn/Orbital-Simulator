@@ -9,13 +9,13 @@
 
 #include "dragon.h"
 
-/***************************************************
- * DRAGON
- * the Dragon satellite default constructor
- * We will put this satellite in a low earth orbit at
- * (0.0 m, 8,000,000.0 m) with a velocity of (-7,900.0 m/s, 0.0 m/s).
- * The radius of Dragon is going to be 7 pixels.
- ***************************************************/
+ /***************************************************
+  * DRAGON
+  * the Dragon satellite default constructor
+  * We will put this satellite in a low earth orbit at
+  * (0.0 m, 8,000,000.0 m) with a velocity of (-7,900.0 m/s, 0.0 m/s).
+  * The radius of Dragon is going to be 7 pixels.
+  ***************************************************/
 Dragon::Dragon()
 {
    radius = 7.0;
@@ -34,7 +34,7 @@ void Dragon::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
    satellites->push_back(std::make_unique<DragonCenter>(*this, Angle(0.0), 6.0));
    satellites->push_back(std::make_unique<DragonLeft>(*this, Angle(120.0), 6.0));
    satellites->push_back(std::make_unique<DragonRight>(*this, Angle(240.0), 6.0));
-   
+
    satellites->push_back(std::make_unique<Fragment>(*this, Angle(60.0)));
    satellites->push_back(std::make_unique<Fragment>(*this, Angle(180.0)));
 }

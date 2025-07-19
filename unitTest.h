@@ -90,7 +90,7 @@ protected:
       // handle the no test case
       if (tests.empty())
       {
-         std::cout << "There were no tests\n";
+         std::cout << "There were no tests]\n";
          return;
       }
 

@@ -13,14 +13,14 @@
 #include "angle.h"
 #include "uiDraw.h"
 
-// Static member definitions
+ // Static member definitions
 const double Projectile::PROJECTILE_SPEED = 9000.0;  // 9,000 m/s
 const double Projectile::PROJECTILE_RADIUS = 0.5;    // 1 pixel diameter
 const int Projectile::PROJECTILE_LIFETIME = 70;      // 70 game units
 
 /***************************************************
  * PROJECTILE : DEFAULT CONSTRUCTOR
- * Create a projectile at the origin
+ * Create a projectile at the origin (for testing purposes)
  ***************************************************/
 Projectile::Projectile() : Satellite()
 {
@@ -38,26 +38,26 @@ Projectile::Projectile() : Satellite()
  *        shipVelocity - current velocity of the ship
  ***************************************************/
 Projectile::Projectile(const Position& shipPosition, const Angle& shipDirection, const Velocity& shipVelocity)
-: Satellite()
+   : Satellite()
 {
    radius = PROJECTILE_RADIUS;
    angularVelocity = 0.0;  // Projectiles don't rotate
    age = 0;
    dead = false;
-   
+
    // Set projectile direction to match ship direction
    direction = shipDirection;
-   
+
    // Calculate starting position 19 pixels in front of the ship
    // Using the formula: ptShipFront = rotate(ptShipCenter, 0.0, 19.0, radians)
    Position offset;
    offset.setPixelsX(19.0 * sin(shipDirection.getRadians()));
    offset.setPixelsY(19.0 * cos(shipDirection.getRadians()));
-   
+
    position = shipPosition;
    position.addMetersX(offset.getMetersX());
    position.addMetersY(offset.getMetersY());
-   
+
    // Set velocity: ship velocity + 9,000 m/s in ship direction
    velocity = shipVelocity;
    Velocity projectileVelocity;
@@ -74,7 +74,7 @@ void Projectile::move(double time)
 {
    // Call base class move for physics (gravity affects projectiles)
    Satellite::move(time);
-   
+
    // Check if projectile has expired (after 70 game units)
    if (age >= PROJECTILE_LIFETIME)
    {

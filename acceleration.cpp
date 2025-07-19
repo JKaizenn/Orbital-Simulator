@@ -2,13 +2,14 @@
  * Source File:
  *    ACCELERATION
  * Author:
- *    Br. Helfrich
+ *    Jessen Forbush & Roger Galan Manzano
  * Summary:
  *    Everything we need to know about changing speed
  ************************************************************************/
 
 #include "acceleration.h"
 #include "angle.h"
+
 #include <cmath>
 
  /*********************************************
@@ -23,11 +24,11 @@ void Acceleration::add(const Acceleration& acceleration)
 }
 
 /*********************************************
- * ACCELERATION : SET
- * With a given angle (in radians) and value
- * for magnitude size, calculate the horizontal
- * and vertical acceleration components.
- *********************************************/
+* ACCELERATION : SET
+* With a given angle (in radians) and value
+* for magnitude size, calculate the horizontal
+* and vertical acceleration components.
+*********************************************/
 void Acceleration::set(const Angle& angle, double magnitude)
 {
    ddx = magnitude * sin(angle.getRadians());

@@ -11,14 +11,14 @@
 #include "hubble.h"
 #include "unitTest.h"
 
-/***************************************************
- * HUBBLE TEST
- * Test the Hubble class
- ***************************************************/
+ /***************************************************
+  * HUBBLE TEST
+  * Test the Hubble class
+  ***************************************************/
 class TestHubble : public UnitTest
 {
 public:
-   
+
    void run()
    {
       // Constructor Tests
@@ -28,10 +28,10 @@ public:
       destroyHubbleComputer_2Fragments();
       destroyHubbleLeft_2Fragments();
       destroyHubbleRight_2Fragments();
-      
+
       report("Hubble");
    }
-   
+
 private:
    // Constructor Tests
    void defaultConstructor();
@@ -40,5 +40,5 @@ private:
    void destroyHubbleComputer_2Fragments();
    void destroyHubbleLeft_2Fragments();
    void destroyHubbleRight_2Fragments();
-   
+
 };

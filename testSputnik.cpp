@@ -11,18 +11,18 @@
 #include "testSputnik.h"
 #include <math.h>
 
-/*************************************
- * DEFAULT CONSTRUCTOR
- * input: nothing
- * output: position (-36515095.13, 21082000.0), velocity (2050.0, 2684.68), dead(false), angularVelocity(0.01), radius(4.0)
- **************************************/
+ /*************************************
+  * DEFAULT CONSTRUCTOR
+  * input: nothing
+  * output: position (-36515095.13, 21082000.0), velocity (2050.0, 2684.68), dead(false), angularVelocity(0.01), radius(4.0)
+  **************************************/
 void TestSputnik::defaultConstructor()
 {
    // SETUP
-   
+
    // EXERCISE
    Sputnik s;
-   
+
    // VERIFY
    assertEquals(s.position.x, -36515095.13);
    assertEquals(s.position.y, 21082000.0);
@@ -32,7 +32,7 @@ void TestSputnik::defaultConstructor()
    assertEquals(s.angularVelocity, 0.01);
    assertEquals(s.radius, 4.0);
    assertEquals(s.direction.radians, 0.0);
-   
+
    // TEARDOWN
 }
 
@@ -47,10 +47,10 @@ void TestSputnik::destroySputnik_4Fragments()
    Sputnik sputnik;
    sputnik.direction.radians = M_PI;
    std::vector<std::unique_ptr<Satellite>> satellites;
-   
+
    // EXERCISE
    sputnik.destroy(&satellites);
-   
+
    // VERIFY
    assertEquals(satellites.size(), 4); // 4 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
@@ -69,7 +69,7 @@ void TestSputnik::destroySputnik_4Fragments()
    assertEquals(f1->radius, 2.0);
    assertEquals(f2->radius, 2.0);
    assertEquals(f3->radius, 2.0);
-   
+
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
 }

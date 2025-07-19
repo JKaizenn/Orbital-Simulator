@@ -7,6 +7,7 @@
  *    Puts everything into orbit and into a playable state
  ************************************************************************/
 
+#pragma once
 #include "sim.h"
 
 double Sim::computeDistance(const Position& pos1, const Position& pos2)

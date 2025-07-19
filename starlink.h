@@ -20,11 +20,11 @@ class Starlink : public Satellite
 {
    friend TestSatellite;
 public:
-   
+
    // Constructors
    Starlink();
    ~Starlink() {}
-   
+
    // Satellite Virtual Functions
    void draw(ogstream* pgout) const override;
    void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) override;

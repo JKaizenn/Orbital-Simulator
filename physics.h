@@ -9,9 +9,9 @@
 
 #pragma once
 
-#define _USE_MATH_DEFINES
+#define _USE_MATH_DEFINES 
 #include <math.h>
-#include <cassert>  // for ASSERT
+#include <cassert>  // for ASSERT 
 
 # define TIME 48.0
 # define RADIUS_EARTH 6378000.0
@@ -34,3 +34,4 @@ inline double directionOfGravityPull(double horizonPos, double verticalPos)
 {
    return atan2(POS_HORIZON_EARTH - horizonPos, POS_VERTICAL_EARTH - verticalPos);
 }
+

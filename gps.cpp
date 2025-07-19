@@ -2,24 +2,25 @@
  * Source File:
  *    Gps
  * Author:
- *    Roger Galan & Jessen Forbush
+*    Roger Galan & Jessen Forbush
  * Summary:
  *    The Gps class
  ************************************************************************/
 
+#pragma once
 #include "gps.h"
 
 /***************************************************
  * GPS NON DEFAULT CONSTRUCTOR
  * a GPS satellite, there will be 6 in the program.
- * Each will have a specific position, velocity,
+ * Each will have a specific position, velocity, 
  * and radius of 10 pixels
  ***************************************************/
 Gps::Gps(int index)
 {
    radius = 12.0;
    angularVelocity = 0.05;
-   
+
    if (index == 0)
    {
       position.setMeters(0.0, 26560000.0);
@@ -59,11 +60,11 @@ Gps::Gps(int index)
 void Gps::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 {
    satellites->push_back(std::make_unique<GpsCenter>(*this, Angle(60.0), 8.0));
-   satellites->push_back(std::make_unique<GpsLeft>(*this, Angle(120.0), 7.0));
-   satellites->push_back(std::make_unique<GpsRight>(*this, Angle(180.0), 7.0));
-   
-   satellites->push_back(std::make_unique<Fragment>(*this, Angle(240.0)));
-   satellites->push_back(std::make_unique<Fragment>(*this, Angle(300.0)));
+   satellites->push_back(std::make_unique<GpsLeft>(*this, Angle(180.0), 7.0)); // changing left and right to 3 makes them appear
+   satellites->push_back(std::make_unique<GpsRight>(*this, Angle(300.0), 7.0)); // for some reason these break into fragments on spawn
+
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(0.0)));
+   satellites->push_back(std::make_unique<Fragment>(*this, Angle(0.0)));
 }
 
 void GpsCenter::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
@@ -88,9 +89,9 @@ void GpsRight::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 }
 
 /***************************************************
- * SATELLITE DRAW
- * Draw the satellite
- ***************************************************/
+* SATELLITE DRAW
+* Draw the satellite
+***************************************************/
 void Gps::draw(ogstream* pgout) const
 {
    if (pgout != nullptr)

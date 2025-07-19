@@ -11,24 +11,24 @@
 #include "sputnik.h"
 #include "unitTest.h"
 
-/***************************************************
- * SPUTNIK TEST
- * Test the Sputnik class
- ***************************************************/
+ /***************************************************
+  * SPUTNIK TEST
+  * Test the Sputnik class
+  ***************************************************/
 class TestSputnik : public UnitTest
 {
 public:
-   
+
    void run()
    {
       // Constructor Tests
       defaultConstructor();
       destroySputnik_4Fragments();
-      
-      
+
+
       report("Sputnik");
    }
-   
+
 private:
    // Constructor Tests
    void defaultConstructor();

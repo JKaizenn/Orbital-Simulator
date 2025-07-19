@@ -10,10 +10,10 @@
 #pragma once
 #include "satellite.h"
 
-/***************************************************
- * DRAGON
- * a SpaceX Crew Dragon satellite
- ***************************************************/
+ /***************************************************
+  * DRAGON
+  * a SpaceX Crew Dragon satellite
+  ***************************************************/
 class Dragon : public Satellite
 {
 public:

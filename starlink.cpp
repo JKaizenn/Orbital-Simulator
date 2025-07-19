@@ -1,22 +1,22 @@
 /***********************************************************************
- * Source File :
- *Starlink
- * Author :
- *Jessen Forbush& Roger Galan
- * Summary :
- *The Starlink class
- ************************************************************************/
+* Source File :
+*Starlink
+* Author :
+   *Jessen Forbush& Roger Galan
+   * Summary :
+   *The Starlink class
+   ************************************************************************/
 
 #include "starlink.h"
 
-/***************************************************
- * STARLINK
- * the Starlink satellite default constructor
- * We will therefore put our Starlink satellite at
- * (0.0 m, -13,020,000.0 m) with a velocity of (5,800.0 m/s, 0.0 m/s).
- * The radius of the satellite is 6 pixels.
- ***************************************************/
-Starlink::Starlink()
+   /***************************************************
+    * STARLINK
+    * the Starlink satellite default constructor
+    * We will therefore put our Starlink satellite at
+    * (0.0 m, -13,020,000.0 m) with a velocity of (5,800.0 m/s, 0.0 m/s).
+    * The radius of the satellite is 6 pixels.
+    ***************************************************/
+   Starlink::Starlink()
 {
    radius = 6.0;
    angularVelocity = 0.05;
@@ -33,7 +33,7 @@ void Starlink::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 {
    satellites->push_back(std::make_unique<StarlinkBody>(*this, Angle(90.0), 2.0));
    satellites->push_back(std::make_unique<StarlinkArray>(*this, Angle(270.0), 4.0));
-   
+
    satellites->push_back(std::make_unique<Fragment>(*this, Angle(45.0)));
    satellites->push_back(std::make_unique<Fragment>(*this, Angle(135.0)));
 }

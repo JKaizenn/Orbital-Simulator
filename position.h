@@ -1,8 +1,10 @@
 /***********************************************************************
  * Header File:
- *    Point : The representation of a position
+ *    Point : The representation of a position 
  * Author:
  *    Br. Helfrich
+ * Edited By:
+ *    Roger Galan & Jessen Forbush
  * Summary:
  *    Everything we need to know about a location on the screen
  *    or the location on the field.
@@ -11,39 +13,41 @@
 
 #pragma once
 
-#include <iostream>
+#include <iostream> 
 #include <cmath>
 
 class TestPosition;
 class TestSatellite;
-class TestGps;
 class TestSputnik;
-class TestHubble;
 class TestStarlink;
 class TestDragon;
+class TestGps;
+class TestHubble;
 class TestDreamChaser;
 class TestProjectile;
-class TestSim;
 class Acceleration;
 class Velocity;
+class TestSim;
+
 
 /*********************************************
  * Position
- * A single position on the field in Meters
+ * A single position on the field in Meters  
  *********************************************/
 class Position
 {
 public:
    friend TestPosition;
    friend TestSatellite;
-   friend TestGps;
    friend TestSputnik;
-   friend TestHubble;
    friend TestStarlink;
    friend TestDragon;
+   friend TestGps;
+   friend TestHubble;
    friend TestDreamChaser;
    friend TestProjectile;
    friend TestSim;
+
    
    // constructors
    Position()            : x(0.0), y(0.0)  {}
@@ -77,21 +81,22 @@ public:
    }
    double getZoom() const { return metersFromPixels; }
 
-private:
-   double x;                 // horizontal position
-   double y;                 // vertical position
-   static double metersFromPixels;
-};
-
-/*********************************************
+ /*********************************************
  * COMPUTE DISTANCE
  * Find the distance between two positions
  *********************************************/
 inline double computeDistance(const Position& pos1, const Position& pos2)
 {
    return sqrt((pos1.getMetersX() - pos2.getMetersX()) * (pos1.getMetersX() - pos2.getMetersX()) +
-               (pos1.getMetersY() - pos2.getMetersY()) * (pos1.getMetersY() - pos2.getMetersY()));
+      (pos1.getMetersY() - pos2.getMetersY()) * (pos1.getMetersY() - pos2.getMetersY()));   
 }
+private:
+   double x;                 // horizontal position
+   double y;                 // vertical position
+   static double metersFromPixels;
+};
+
+
 
 // stream I/O useful for debugging
 std::ostream & operator << (std::ostream & out, const Position& pt);
@@ -107,3 +112,5 @@ struct PT
    double x;
    double y;
 };
+
+

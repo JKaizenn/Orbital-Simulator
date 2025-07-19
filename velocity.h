@@ -13,19 +13,19 @@
 class TestPosition;
 class TestVelocity;
 class TestAcceleration;
-class TestProjectile;
 class TestSatellite;
-class TestGps;
-class TestHubble;
 class TestSputnik;
 class TestStarlink;
 class TestDragon;
+class TestGps;
+class TestHubble;
 class TestDreamChaser;
 class TestProjectile;
-
+class TestSim;
 // for add()
 class Acceleration;
 class Angle;
+
 
 /*********************************************
  * Velocity
@@ -36,21 +36,22 @@ class Velocity
    // for unit tests
    friend TestPosition;
    friend TestVelocity;
-   friend TestProjectile;
    friend TestSatellite;
-   friend TestGps;
-   friend TestHubble;
    friend TestSputnik;
    friend TestStarlink;
    friend TestDragon;
+   friend TestGps;
+   friend TestHubble;
    friend TestDreamChaser;
    friend TestProjectile;
+   friend TestSim;
+
 
 public:
    // constructors
    Velocity() : dx(0.0), dy(0.0) {}
    Velocity(double dx, double dy) : dx(dx), dy(dy) {}
-//   Velocity& operator = (const Velocity& vel);
+   Velocity& operator = (const Velocity& vel);
 
 
    // getters

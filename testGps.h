@@ -11,14 +11,14 @@
 #include "gps.h"
 #include "unitTest.h"
 
-/***************************************************
- * GPS TEST
- * Test the GPS class
- ***************************************************/
+ /***************************************************
+  * GPS TEST
+  * Test the GPS class
+  ***************************************************/
 class TestGps : public UnitTest
 {
 public:
-   
+
    void run()
    {
       // Constructor Tests
@@ -32,10 +32,10 @@ public:
       destroyGpsCenter_3Fragments();
       destroyGpsLeft_3Fragments();
       destroyGpsRight_3Fragments();
-      
+
       report("GPS");
    }
-   
+
 private:
    // Constructor Tests for all 6 GPS satellites
    void defaultConstructor0();
@@ -48,6 +48,6 @@ private:
    void destroyGpsCenter_3Fragments();
    void destroyGpsLeft_3Fragments();
    void destroyGpsRight_3Fragments();
-   
-   
+
+
 };

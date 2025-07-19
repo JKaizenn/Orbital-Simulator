@@ -2,17 +2,18 @@
  * Source File:
  *    HUBBLE
  * Author:
- *    Roger Galan & Jessen Forbush
+*    Roger Galan & Jessen Forbush
  * Summary:
  *    The Hubble class
  ************************************************************************/
 
+#pragma once
 #include "hubble.h"
 
 /***************************************************
  * HUBBLE
  * the Hubble satellite default constructor
- * We will start with the telescope at (0.0 m, -42,164,000.0 m)
+ * We will start with the telescope at (0.0 m, -42,164,000.0 m) 
  * with a velocity of (3,100.0 m/s, 0.0 m/s).
  * The radius of Hubble is going to be 10 pixels
  ***************************************************/
@@ -62,9 +63,9 @@ void HubbleRight::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 }
 
 /***************************************************
- * SATELLITE DRAW
- * Draw the satellite
- ***************************************************/
+* SATELLITE DRAW
+* Draw the satellite
+***************************************************/
 void Hubble::draw(ogstream* pgout) const
 {
    if (pgout != nullptr)

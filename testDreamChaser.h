@@ -11,14 +11,14 @@
 #include "hubble.h"
 #include "unitTest.h"
 
-/***************************************************
- * Dream Chaser TEST
- * Test the Ship class
- ***************************************************/
+ /***************************************************
+  * Dream Chaser TEST
+  * Test the Ship class
+  ***************************************************/
 class TestDreamChaser : public UnitTest
 {
 public:
-   
+
    void run()
    {
       // Constructor Tests
@@ -30,10 +30,10 @@ public:
       input_downKeyPressed();
       input_leftKeyPressed();
       input_rightKeyPressed();
-      
-      report("DreamChaser");
+
+      report("Dreamchaser");
    }
-   
+
 private:
    // Constructor Tests
    void defaultConstructor();
@@ -44,5 +44,5 @@ private:
    void input_downKeyPressed();
    void input_leftKeyPressed();
    void input_rightKeyPressed();
-   
+
 };

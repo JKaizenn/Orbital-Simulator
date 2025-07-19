@@ -19,18 +19,18 @@ class TestProjectile;
 class Projectile : public Satellite
 {
    friend TestProjectile;
-   
+
 public:
    // Constructors
    Projectile();
    Projectile(const Position& shipPosition, const Angle& shipDirection, const Velocity& shipVelocity);
    ~Projectile() {}
-   
+
    // Virtual function implementations
    void draw(ogstream* pgout) const override;
    void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) override;
    void move(double time) override;
-   
+
 private:
    static const double PROJECTILE_SPEED;     // 9,000 m/s
    static const double PROJECTILE_RADIUS;    // 0.5 pixels (1 pixel diameter)

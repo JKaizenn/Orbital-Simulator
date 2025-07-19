@@ -14,8 +14,8 @@
 
 class TestAcceleration;
 class TestVelocity;
+class TestProjectile;
 class TestPosition;
-class TestLander;
 class Angle;
 
 
@@ -28,7 +28,7 @@ class Acceleration
    friend TestPosition;
    friend TestVelocity;
    friend TestAcceleration;
-   friend TestLander;
+   friend TestProjectile;
 
 public:
    // constructors
@@ -42,7 +42,7 @@ public:
    double getDDY()   const { return this->ddy; }
    // Velocity getVelocity(time)
    
-   // setters
+   // setters                        
    void setDDX(double ddx) { this->ddx = ddx; }
    void setDDY(double ddy) { this->ddy = ddy; }
    void set(const Angle& a, double magnitude);

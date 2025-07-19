@@ -45,7 +45,16 @@ void TestStarlink::destroyStarlink_2Part_2Fragments()
 {
    // SETUP
    Starlink starlink;
+   // Explicit attribute setting
+   starlink.position.x = 0.0;
+   starlink.position.y = -13020000.0;
+   starlink.velocity.dx = 5800.0;
+   starlink.velocity.dy = 0.0;
    starlink.direction.radians = M_PI;
+   starlink.angularVelocity = 0.05;
+   starlink.radius = 6.0;
+   starlink.dead = false;
+   
    std::vector<std::unique_ptr<Satellite>> satellites;
    
    // EXERCISE
@@ -70,6 +79,12 @@ void TestStarlink::destroyStarlink_2Part_2Fragments()
    assertEquals(f0->radius, 2.0);
    assertEquals(f1->radius, 2.0);
    
+   // Verify parts and fragments received velocity kick
+   assertEquals(sb->velocity.dx != 5800.0 || sb->velocity.dy != 0.0, true);
+   assertEquals(sa->velocity.dx != 5800.0 || sa->velocity.dy != 0.0, true);
+   assertEquals(f0->velocity.dx != 5800.0 || f0->velocity.dy != 0.0, true);
+   assertEquals(f1->velocity.dx != 5800.0 || f1->velocity.dy != 0.0, true);
+   
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
 }
@@ -83,8 +98,25 @@ void TestStarlink::destroyStarlinkBody_3Fragments()
 {
    // SETUP
    Starlink starlink;
+   // Explicit attribute setting
+   starlink.position.x = 0.0;
+   starlink.position.y = -13020000.0;
+   starlink.velocity.dx = 5800.0;
+   starlink.velocity.dy = 0.0;
    starlink.direction.radians = M_PI;
+   starlink.angularVelocity = 0.05;
+   starlink.radius = 6.0;
+   starlink.dead = false;
+   
    StarlinkBody starlinkBody(starlink, Angle(0.0), 2.0);
+   // Explicit attribute setting for part
+   starlinkBody.position = starlink.position;
+   starlinkBody.velocity = starlink.velocity;
+   starlinkBody.direction = starlink.direction;
+   starlinkBody.angularVelocity = starlink.angularVelocity;
+   starlinkBody.radius = 2.0;
+   starlinkBody.dead = false;
+   
    std::vector<std::unique_ptr<Satellite>> satellites;
    
    // EXERCISE
@@ -105,6 +137,15 @@ void TestStarlink::destroyStarlinkBody_3Fragments()
    assertEquals(f1->radius, 2.0);
    assertEquals(f2->radius, 2.0);
    
+   // Verify fragments received velocity kick
+   assertEquals(f0->velocity.dx != 5800.0 || f0->velocity.dy != 0.0, true);
+   assertEquals(f1->velocity.dx != 5800.0 || f1->velocity.dy != 0.0, true);
+   assertEquals(f2->velocity.dx != 5800.0 || f2->velocity.dy != 0.0, true);
+   
+   // Verify fragments have different velocities from each other
+   assertEquals(f0->velocity.dx != f1->velocity.dx || f0->velocity.dy != f1->velocity.dy, true);
+   assertEquals(f1->velocity.dx != f2->velocity.dx || f1->velocity.dy != f2->velocity.dy, true);
+   
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
 }
@@ -118,8 +159,25 @@ void TestStarlink::destroyStarlinkArray_3Fragments()
 {
    // SETUP
    Starlink starlink;
+   // Explicit attribute setting
+   starlink.position.x = 0.0;
+   starlink.position.y = -13020000.0;
+   starlink.velocity.dx = 5800.0;
+   starlink.velocity.dy = 0.0;
    starlink.direction.radians = M_PI;
+   starlink.angularVelocity = 0.05;
+   starlink.radius = 6.0;
+   starlink.dead = false;
+   
    StarlinkArray starlinkArray(starlink, Angle(0.0), 4.0);
+   // Explicit attribute setting for part
+   starlinkArray.position = starlink.position;
+   starlinkArray.velocity = starlink.velocity;
+   starlinkArray.direction = starlink.direction;
+   starlinkArray.angularVelocity = starlink.angularVelocity;
+   starlinkArray.radius = 4.0;
+   starlinkArray.dead = false;
+   
    std::vector<std::unique_ptr<Satellite>> satellites;
    
    // EXERCISE
@@ -139,6 +197,15 @@ void TestStarlink::destroyStarlinkArray_3Fragments()
    assertEquals(f0->radius, 2.0);
    assertEquals(f1->radius, 2.0);
    assertEquals(f2->radius, 2.0);
+   
+   // Verify fragments received velocity kick
+   assertEquals(f0->velocity.dx != 5800.0 || f0->velocity.dy != 0.0, true);
+   assertEquals(f1->velocity.dx != 5800.0 || f1->velocity.dy != 0.0, true);
+   assertEquals(f2->velocity.dx != 5800.0 || f2->velocity.dy != 0.0, true);
+   
+   // Verify fragments have different velocities from each other
+   assertEquals(f0->velocity.dx != f1->velocity.dx || f0->velocity.dy != f1->velocity.dy, true);
+   assertEquals(f1->velocity.dx != f2->velocity.dx || f1->velocity.dy != f2->velocity.dy, true);
    
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy

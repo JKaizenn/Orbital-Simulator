@@ -45,7 +45,16 @@ void TestDragon::destroyDragon_3Parts_2Fragments()
 {
    // SETUP
    Dragon dragon;
+   // Explicit attribute setting
+   dragon.position.x = 0.0;
+   dragon.position.y = 8000000.0;
+   dragon.velocity.dx = -7900.0;
+   dragon.velocity.dy = 0.0;
    dragon.direction.radians = M_PI;
+   dragon.angularVelocity = 0.05;
+   dragon.radius = 7.0;
+   dragon.dead = false;
+   
    std::vector<std::unique_ptr<Satellite>> satellites;
    
    // EXERCISE
@@ -74,6 +83,13 @@ void TestDragon::destroyDragon_3Parts_2Fragments()
    assertEquals(f0->radius, 2.0);
    assertEquals(f1->radius, 2.0);
    
+   // Verify parts and fragments received velocity kick
+   assertEquals(dc->velocity.dx != -7900.0 || dc->velocity.dy != 0.0, true);
+   assertEquals(dl->velocity.dx != -7900.0 || dl->velocity.dy != 0.0, true);
+   assertEquals(dr->velocity.dx != -7900.0 || dr->velocity.dy != 0.0, true);
+   assertEquals(f0->velocity.dx != -7900.0 || f0->velocity.dy != 0.0, true);
+   assertEquals(f1->velocity.dx != -7900.0 || f1->velocity.dy != 0.0, true);
+   
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
 }
@@ -87,8 +103,25 @@ void TestDragon::destroyDragonCenter_4Fragments()
 {
    // SETUP
    Dragon dragon;
+   // Explicit attribute setting
+   dragon.position.x = 0.0;
+   dragon.position.y = 8000000.0;
+   dragon.velocity.dx = -7900.0;
+   dragon.velocity.dy = 0.0;
    dragon.direction.radians = M_PI;
+   dragon.angularVelocity = 0.05;
+   dragon.radius = 7.0;
+   dragon.dead = false;
+   
    DragonCenter dragonCenter(dragon, Angle(0.0), 6.0);
+   // Explicit attribute setting for part
+   dragonCenter.position = dragon.position;
+   dragonCenter.velocity = dragon.velocity;
+   dragonCenter.direction = dragon.direction;
+   dragonCenter.angularVelocity = dragon.angularVelocity;
+   dragonCenter.radius = 6.0;
+   dragonCenter.dead = false;
+   
    std::vector<std::unique_ptr<Satellite>> satellites;
    
    // EXERCISE
@@ -113,6 +146,16 @@ void TestDragon::destroyDragonCenter_4Fragments()
    assertEquals(f2->radius, 2.0);
    assertEquals(f3->radius, 2.0);
    
+   // Verify fragments received velocity kick
+   assertEquals(f0->velocity.dx != -7900.0 || f0->velocity.dy != 0.0, true);
+   assertEquals(f1->velocity.dx != -7900.0 || f1->velocity.dy != 0.0, true);
+   assertEquals(f2->velocity.dx != -7900.0 || f2->velocity.dy != 0.0, true);
+   assertEquals(f3->velocity.dx != -7900.0 || f3->velocity.dy != 0.0, true);
+   
+   // Verify fragments have different velocities from each other
+   assertEquals(f0->velocity.dx != f1->velocity.dx || f0->velocity.dy != f1->velocity.dy, true);
+   assertEquals(f1->velocity.dx != f2->velocity.dx || f1->velocity.dy != f2->velocity.dy, true);
+   
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
 }
@@ -126,8 +169,25 @@ void TestDragon::destroyDragonLeft_2Fragments()
 {
    // SETUP
    Dragon dragon;
+   // Explicit attribute setting
+   dragon.position.x = 0.0;
+   dragon.position.y = 8000000.0;
+   dragon.velocity.dx = -7900.0;
+   dragon.velocity.dy = 0.0;
    dragon.direction.radians = M_PI;
+   dragon.angularVelocity = 0.05;
+   dragon.radius = 7.0;
+   dragon.dead = false;
+   
    DragonLeft dragonLeft(dragon, Angle(0.0), 6.0);
+   // Explicit attribute setting for part
+   dragonLeft.position = dragon.position;
+   dragonLeft.velocity = dragon.velocity;
+   dragonLeft.direction = dragon.direction;
+   dragonLeft.angularVelocity = dragon.angularVelocity;
+   dragonLeft.radius = 6.0;
+   dragonLeft.dead = false;
+   
    std::vector<std::unique_ptr<Satellite>> satellites;
    
    // EXERCISE
@@ -144,6 +204,13 @@ void TestDragon::destroyDragonLeft_2Fragments()
    assertEquals(f0->radius, 2.0);
    assertEquals(f1->radius, 2.0);
    
+   // Verify fragments received velocity kick
+   assertEquals(f0->velocity.dx != -7900.0 || f0->velocity.dy != 0.0, true);
+   assertEquals(f1->velocity.dx != -7900.0 || f1->velocity.dy != 0.0, true);
+   
+   // Verify fragments have different velocities from each other
+   assertEquals(f0->velocity.dx != f1->velocity.dx || f0->velocity.dy != f1->velocity.dy, true);
+   
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy
 }
@@ -157,8 +224,25 @@ void TestDragon::destroyDragonRight_2Fragments()
 {
    // SETUP
    Dragon dragon;
+   // Explicit attribute setting
+   dragon.position.x = 0.0;
+   dragon.position.y = 8000000.0;
+   dragon.velocity.dx = -7900.0;
+   dragon.velocity.dy = 0.0;
    dragon.direction.radians = M_PI;
+   dragon.angularVelocity = 0.05;
+   dragon.radius = 7.0;
+   dragon.dead = false;
+   
    DragonRight dragonRight(dragon, Angle(0.0), 6.0);
+   // Explicit attribute setting for part
+   dragonRight.position = dragon.position;
+   dragonRight.velocity = dragon.velocity;
+   dragonRight.direction = dragon.direction;
+   dragonRight.angularVelocity = dragon.angularVelocity;
+   dragonRight.radius = 6.0;
+   dragonRight.dead = false;
+   
    std::vector<std::unique_ptr<Satellite>> satellites;
    
    // EXERCISE
@@ -174,6 +258,13 @@ void TestDragon::destroyDragonRight_2Fragments()
    assertEquals(f1->direction.radians, M_PI);
    assertEquals(f0->radius, 2.0);
    assertEquals(f1->radius, 2.0);
+   
+   // Verify fragments received velocity kick
+   assertEquals(f0->velocity.dx != -7900.0 || f0->velocity.dy != 0.0, true);
+   assertEquals(f1->velocity.dx != -7900.0 || f1->velocity.dy != 0.0, true);
+   
+   // Verify fragments have different velocities from each other
+   assertEquals(f0->velocity.dx != f1->velocity.dx || f0->velocity.dy != f1->velocity.dy, true);
    
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy

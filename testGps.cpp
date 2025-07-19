@@ -170,7 +170,16 @@ void TestGps::destroyGps_3Parts2Fragments()
 {
    // SETUP
    Gps gps(1);
+   // Explicit attribute setting
+   gps.position.x = 23001634.72;
+   gps.position.y = 13280000.0;
+   gps.velocity.dx = -1940.0;
+   gps.velocity.dy = 3360.18;
    gps.direction.radians = M_PI;
+   gps.angularVelocity = 0.05;
+   gps.radius = 12.0;
+   gps.dead = false;
+   
    std::vector<std::unique_ptr<Satellite>> satellites;
    
    // EXERCISE
@@ -199,8 +208,15 @@ void TestGps::destroyGps_3Parts2Fragments()
    assertEquals(f0->radius, 2.0);
    assertEquals(f1->radius, 2.0);
    
+   // Verify parts and fragments received velocity kick
+   assertEquals(gc->velocity.dx != -1940.0 || gc->velocity.dy != 3360.18, true);
+   assertEquals(gl->velocity.dx != -1940.0 || gl->velocity.dy != 3360.18, true);
+   assertEquals(gr->velocity.dx != -1940.0 || gr->velocity.dy != 3360.18, true);
+   assertEquals(f0->velocity.dx != -1940.0 || f0->velocity.dy != 3360.18, true);
+   assertEquals(f1->velocity.dx != -1940.0 || f1->velocity.dy != 3360.18, true);
+   
    // TEARDOWN
-   satellites.clear(); // unique_ptr automatically frees memory on destroy
+   satellites.clear();
 }
 
 /*************************************
@@ -212,8 +228,25 @@ void TestGps::destroyGpsCenter_3Fragments()
 {
    // SETUP
    Gps gps(1);
+   // Explicit attribute setting
+   gps.position.x = 23001634.72;
+   gps.position.y = 13280000.0;
+   gps.velocity.dx = -1940.0;
+   gps.velocity.dy = 3360.18;
    gps.direction.radians = M_PI;
-   GpsCenter gpsCenter(gps, Angle(0.0), 7.0);
+   gps.angularVelocity = 0.05;
+   gps.radius = 12.0;
+   gps.dead = false;
+   
+   GpsCenter gpsCenter(gps, Angle(0.0), 8.0);
+   // Explicit attribute setting for part
+   gpsCenter.position = gps.position;
+   gpsCenter.velocity = gps.velocity;
+   gpsCenter.direction = gps.direction;
+   gpsCenter.angularVelocity = gps.angularVelocity;
+   gpsCenter.radius = 8.0;
+   gpsCenter.dead = false;
+   
    std::vector<std::unique_ptr<Satellite>> satellites;
    
    // EXERCISE
@@ -234,6 +267,15 @@ void TestGps::destroyGpsCenter_3Fragments()
    assertEquals(f1->radius, 2.0);
    assertEquals(f2->radius, 2.0);
    
+   // Verify fragments received velocity kick
+   assertEquals(f0->velocity.dx != -1940.0 || f0->velocity.dy != 3360.18, true);
+   assertEquals(f1->velocity.dx != -1940.0 || f1->velocity.dy != 3360.18, true);
+   assertEquals(f2->velocity.dx != -1940.0 || f2->velocity.dy != 3360.18, true);
+   
+   // Verify fragments have different velocities from each other
+   assertEquals(f0->velocity.dx != f1->velocity.dx || f0->velocity.dy != f1->velocity.dy, true);
+   assertEquals(f1->velocity.dx != f2->velocity.dx || f1->velocity.dy != f2->velocity.dy, true);
+   
    // TEARDOWN
    satellites.clear();
 }
@@ -247,15 +289,32 @@ void TestGps::destroyGpsLeft_3Fragments()
 {
    // SETUP
    Gps gps(1);
+   // Explicit attribute setting
+   gps.position.x = 23001634.72;
+   gps.position.y = 13280000.0;
+   gps.velocity.dx = -1940.0;
+   gps.velocity.dy = 3360.18;
    gps.direction.radians = M_PI;
+   gps.angularVelocity = 0.05;
+   gps.radius = 12.0;
+   gps.dead = false;
+   
    GpsLeft gpsLeft(gps, Angle(0.0), 7.0);
+   // Explicit attribute setting for part
+   gpsLeft.position = gps.position;
+   gpsLeft.velocity = gps.velocity;
+   gpsLeft.direction = gps.direction;
+   gpsLeft.angularVelocity = gps.angularVelocity;
+   gpsLeft.radius = 7.0;
+   gpsLeft.dead = false;
+   
    std::vector<std::unique_ptr<Satellite>> satellites;
    
    // EXERCISE
    gpsLeft.destroy(&satellites);
    
    // VERIFY
-   assertUnit(satellites.size() == 3); // 3 fragments
+   assertEquals(satellites.size(), 3); // 3 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
    Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
    Fragment* f2 = dynamic_cast<Fragment*>(satellites[2].get());
@@ -268,6 +327,15 @@ void TestGps::destroyGpsLeft_3Fragments()
    assertEquals(f0->radius, 2.0);
    assertEquals(f1->radius, 2.0);
    assertEquals(f2->radius, 2.0);
+   
+   // Verify fragments received velocity kick
+   assertEquals(f0->velocity.dx != -1940.0 || f0->velocity.dy != 3360.18, true);
+   assertEquals(f1->velocity.dx != -1940.0 || f1->velocity.dy != 3360.18, true);
+   assertEquals(f2->velocity.dx != -1940.0 || f2->velocity.dy != 3360.18, true);
+   
+   // Verify fragments have different velocities from each other
+   assertEquals(f0->velocity.dx != f1->velocity.dx || f0->velocity.dy != f1->velocity.dy, true);
+   assertEquals(f1->velocity.dx != f2->velocity.dx || f1->velocity.dy != f2->velocity.dy, true);
    
    // TEARDOWN
    satellites.clear();
@@ -282,27 +350,53 @@ void TestGps::destroyGpsRight_3Fragments()
 {
    // SETUP
    Gps gps(1);
+   // Explicit attribute setting
+   gps.position.x = 23001634.72;
+   gps.position.y = 13280000.0;
+   gps.velocity.dx = -1940.0;
+   gps.velocity.dy = 3360.18;
    gps.direction.radians = M_PI;
-   GpsRight gpsRight(gps, Angle(0.0), 6.0);
+   gps.angularVelocity = 0.05;
+   gps.radius = 12.0;
+   gps.dead = false;
+   
+   GpsRight gpsRight(gps, Angle(0.0), 7.0);
+   // Explicit attribute setting for part
+   gpsRight.position = gps.position;
+   gpsRight.velocity = gps.velocity;
+   gpsRight.direction = gps.direction;
+   gpsRight.angularVelocity = gps.angularVelocity;
+   gpsRight.radius = 7.0;
+   gpsRight.dead = false;
+   
    std::vector<std::unique_ptr<Satellite>> satellites;
    
    // EXERCISE
    gpsRight.destroy(&satellites);
    
    // VERIFY
-   assertUnit(satellites.size() == 3); // 3 fragments
+   assertEquals(satellites.size(), 3); // 3 fragments
    Fragment* f0 = dynamic_cast<Fragment*>(satellites[0].get());
    Fragment* f1 = dynamic_cast<Fragment*>(satellites[1].get());
    Fragment* f2 = dynamic_cast<Fragment*>(satellites[2].get());
-   assertUnit(f0 != nullptr);
-   assertUnit(f1 != nullptr);
-   assertUnit(f2 != nullptr);
-   assertUnit(f0->direction.radians == M_PI);
-   assertUnit(f1->direction.radians == M_PI);
-   assertUnit(f2->direction.radians == M_PI);
-   assertUnit(f0->radius == 2.0);
-   assertUnit(f1->radius == 2.0);
-   assertUnit(f2->radius == 2.0);
+   assertEquals(f0 != nullptr, true);
+   assertEquals(f1 != nullptr, true);
+   assertEquals(f2 != nullptr, true);
+   assertEquals(f0->direction.radians, M_PI);
+   assertEquals(f1->direction.radians, M_PI);
+   assertEquals(f2->direction.radians, M_PI);
+   assertEquals(f0->radius, 2.0);
+   assertEquals(f1->radius, 2.0);
+   assertEquals(f2->radius, 2.0);
+   
+   // Verify fragments received velocity kick
+   assertEquals(f0->velocity.dx != -1940.0 || f0->velocity.dy != 3360.18, true);
+   assertEquals(f1->velocity.dx != -1940.0 || f1->velocity.dy != 3360.18, true);
+   assertEquals(f2->velocity.dx != -1940.0 || f2->velocity.dy != 3360.18, true);
+   
+   // Verify fragments have different velocities from each other
+   assertEquals(f0->velocity.dx != f1->velocity.dx || f0->velocity.dy != f1->velocity.dy, true);
+   assertEquals(f1->velocity.dx != f2->velocity.dx || f1->velocity.dy != f2->velocity.dy, true);
    
    // TEARDOWN
    satellites.clear();

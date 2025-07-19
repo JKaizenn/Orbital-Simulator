@@ -23,6 +23,7 @@ class TestStarlink;
 class TestDragon;
 class TestDreamChaser;
 class TestProjectile;
+class TestSim;
 class Acceleration;
 class Velocity;
 
@@ -42,6 +43,7 @@ public:
    friend TestDragon;
    friend TestDreamChaser;
    friend TestProjectile;
+   friend TestSim;
    
    // constructors
    Position()            : x(0.0), y(0.0)  {}

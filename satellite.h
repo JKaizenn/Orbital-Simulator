@@ -33,6 +33,7 @@ class TestDreamChaser;
 class TestStarlink;
 class TestDragon;
 class TestGps;
+class TestSim;
 
 class Satellite
 {
@@ -43,6 +44,7 @@ class Satellite
    friend TestStarlink;
    friend TestDragon;
    friend TestGps;
+   friend TestSim;
    
 public:
    Satellite() : position(200.0, 200.0), velocity(0.0, 0.0), dead(false), angularVelocity(0.0), radius(0.0), age(0) {}

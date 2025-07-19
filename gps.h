@@ -2,7 +2,7 @@
  * Header File:
  *    Gps
  * Author:
-*    Roger Galan & Jessen Forbush
+ *    Roger Galan & Jessen Forbush
  * Summary:
  *    The Gps class
  ************************************************************************/

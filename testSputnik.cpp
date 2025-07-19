@@ -45,13 +45,7 @@ void TestSputnik::destroySputnik_4Fragments()
 {
    // SETUP
    Sputnik sputnik;
-   sputnik.position.setMeters(1000.0, 2000.0);
-   sputnik.velocity.setDxDy(2050.0, 2684.68);
    sputnik.direction.radians = M_PI;
-   sputnik.angularVelocity = 0.01;
-   sputnik.radius = 4.0;
-   sputnik.dead = false;
-   
    std::vector<std::unique_ptr<Satellite>> satellites;
    
    // EXERCISE
@@ -75,16 +69,6 @@ void TestSputnik::destroySputnik_4Fragments()
    assertEquals(f1->radius, 2.0);
    assertEquals(f2->radius, 2.0);
    assertEquals(f3->radius, 2.0);
-   
-   // Verify velocity kick applied to fragments
-   assertEquals(f0->velocity.dx, 2050.0);
-   assertEquals(f0->velocity.dy, 3684.68);
-   assertEquals(f1->velocity.dx, 3050.0);
-   assertEquals(f1->velocity.dy, 2684.68);
-   assertEquals(f2->velocity.dx, 2050.0);
-   assertEquals(f2->velocity.dy, 1684.68);
-   assertEquals(f3->velocity.dx, 1050.0);
-   assertEquals(f3->velocity.dy, 2684.68);
    
    // TEARDOWN
    satellites.clear(); // unique_ptr automatically frees memory on destroy

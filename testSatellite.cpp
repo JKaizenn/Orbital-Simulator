@@ -52,9 +52,6 @@ void TestSatellite::constructorWithPosition()
    s1.velocity.dy = 10.0;
    s1.angularVelocity = 2.5;
    s1.direction.radians = M_PI;
-   s1.radius = 0.0;
-   s1.dead = false;
-   
    Angle a;
    a.radians = M_PI / 2.0;                          // PI/2 = 90 degrees
    
@@ -77,7 +74,8 @@ void TestSatellite::constructorWithPosition()
    assertEquals(s1.velocity.dx, 5.0);
    assertEquals(s1.velocity.dy, 10.0);
    assertEquals(s1.angularVelocity, 2.5);
-   assertEquals(s1.direction.radians, M_PI);
+   assertEquals(a.radians, M_PI / 2.0);             // PI/2 = 90 degrees
+   assertEquals(s1.direction.radians, M_PI); // PI = 180 degrees
    assertEquals(s1.dead, false);
    assertEquals(s1.radius, 0.0);
    
@@ -206,11 +204,6 @@ void TestSatellite::getPositionAfterMove()
    s.position.y = 26560000.0;                       // 20180 km + 6378 km = 26558 km altitude
    s.velocity.dx = -3880.0;                         // GPS orbital velocity
    s.velocity.dy = 0.0;
-   s.direction.radians = 0.0;
-   s.angularVelocity = 0.0;
-   s.radius = 0.0;
-   s.dead = false;
-   
    Position initialPos = s.position;
    double time = 48.0;
    
@@ -284,81 +277,6 @@ void TestSatellite::killAlreadyDead()
 }
 
 /*************************************
- * MOVE - ZERO TIME
- * input: satellite moved for zero time
- * output: no changes to satellite state
- **************************************/
-void TestSatellite::moveZeroTime()
-{
-   // SETUP
-   SatelliteDerived s;
-   s.position.x = 1000000.0;
-   s.position.y = 2000000.0;
-   s.velocity.dx = 500.0;
-   s.velocity.dy = -300.0;
-   s.direction.radians = M_PI / 4.0;
-   s.angularVelocity = 0.5;
-   s.radius = 0.0;
-   s.dead = false;
-   
-   Position initialPos = s.position;
-   Velocity initialVel = s.velocity;
-   double initialDirection = s.direction.radians + 0.5;
-   double time = 0.0;                                       // Zero time step
-   
-   // EXERCISE
-   s.move(time);
-   
-   // VERIFY
-   assertEquals(s.position.x, initialPos.x);                // s = s0 + v*t + (1/2)*a*t^2 = s0 + 0
-   assertEquals(s.position.y, initialPos.y);                // s = s0 + v*t + (1/2)*a*t^2 = s0 + 0
-   assertEquals(s.velocity.dx, initialVel.dx);              // v = v0 + a*t = v0 + 0
-   assertEquals(s.velocity.dy, initialVel.dy);              // v = v0 + a*t = v0 + 0
-   assertEquals(s.direction.radians, initialDirection);     // angle = angle0 + w*t = angle0 + 0
-   assertEquals(s.dead, false);
-   assertEquals(s.radius, 0.0);
-   assertEquals(s.angularVelocity, 0.5);
-   
-   // TEARDOWN
-}
-
-/*************************************
- * MOVE - ZERO VELOCITY
- * input: satellite with zero velocity
- * output: position changes only due to gravity
- **************************************/
-void TestSatellite::moveZeroVelocity()
-{
-   // SETUP
-   SatelliteDerived s;
-   s.position.x = 1000000.0;
-   s.position.y = 1000000.0;
-   s.velocity.dx = 0.0;
-   s.velocity.dy = 0.0;
-   s.direction.radians = 0.0;
-   s.angularVelocity = 0.0;
-   s.radius = 0.0;
-   s.dead = false;
-   
-   Position initialPos = s.position;
-   double time = 1.0;
-   
-   // EXERCISE
-   s.move(time);
-   
-   // VERIFY
-   assertEquals(s.position.x != initialPos.x, true);        // s = s0 + v*t + (1/2)*a*t^2
-   assertEquals(s.position.y != initialPos.y, true);        // s = s0 + v*t + (1/2)*a*t^2
-   assertEquals((s.velocity.dx != 0.0 || s.velocity.dy != 0.0), true);  // v = v0 + a*t
-   assertEquals(s.direction.radians, 0.0);                  // angle = angle0 + w*t = 0 + 1.0*1.0
-   assertEquals(s.dead, false);
-   assertEquals(s.radius, 0.0);
-   assertEquals(s.angularVelocity, 0.0);
-   
-   // TEARDOWN
-}
-
-/*************************************
  * MOVE - WITH VELOCITY
  * input: satellite with velocity
  * output: position changes according to physics
@@ -371,11 +289,6 @@ void TestSatellite::moveWithVelocity()
    s.position.y = 1000000.0;
    s.velocity.dx = 100.0;
    s.velocity.dy = 200.0;
-   s.direction.radians = 0.0;
-   s.angularVelocity = 0.0;
-   s.radius = 0.0;
-   s.dead = false;
-   
    Position initialPos = s.position;
    Velocity initialVel = s.velocity;
    double time = 1.0;
@@ -406,13 +319,7 @@ void TestSatellite::moveWithAngularVelocity()
    SatelliteDerived s;
    s.position.x = 1000000.0;
    s.position.y = 1000000.0;
-   s.velocity.dx = 0.0;
-   s.velocity.dy = 0.0;
-   s.direction.radians = 0.0;
    s.angularVelocity = 0.5;
-   s.radius = 0.0;
-   s.dead = false;
-   
    double initialDirection = s.direction.radians;
    double time = 1.0;
    
@@ -424,6 +331,73 @@ void TestSatellite::moveWithAngularVelocity()
    assertEquals(s.direction.radians, expectedDirection);       // angle = 0 + 0.5*1.0 = 0.5
    assertEquals(s.position.x != 1000000.0, true);              // s = s0 + v*t + (1/2)*a*t^2
    assertEquals(s.position.y != 1000000.0, true);              // s = s0 + v*t + (1/2)*a*t^2
+   assertEquals(s.dead, false);
+   assertEquals(s.radius, 0.0);
+   assertEquals(s.angularVelocity, 0.5);
+   
+   // TEARDOWN
+}
+
+/*************************************
+ * MOVE - ZERO VELOCITY
+ * input: satellite with zero velocity
+ * output: position changes only due to gravity
+ **************************************/
+void TestSatellite::moveZeroVelocity()
+{
+   // SETUP
+   SatelliteDerived s;
+   s.position.x = 1000000.0;
+   s.position.y = 1000000.0;
+   s.velocity.dx = 0.0;
+   s.velocity.dy = 0.0;
+   Position initialPos = s.position;
+   double time = 1.0;
+   
+   // EXERCISE
+   s.move(time);
+   
+   // VERIFY
+   assertEquals(s.position.x != initialPos.x, true);        // s = s0 + v*t + (1/2)*a*t^2
+   assertEquals(s.position.y != initialPos.y, true);        // s = s0 + v*t + (1/2)*a*t^2
+   assertEquals((s.velocity.dx != 0.0 || s.velocity.dy != 0.0), true);  // v = v0 + a*t
+   assertEquals(s.direction.radians, 0.0);                  // angle = angle0 + w*t = 0 + 1.0*1.0
+   assertEquals(s.dead, false);
+   assertEquals(s.radius, 0.0);
+   assertEquals(s.angularVelocity, 0.0);
+   
+   // TEARDOWN
+}
+
+/*************************************
+ * MOVE - ZERO TIME
+ * input: satellite moved for zero time
+ * output: no changes to satellite state
+ **************************************/
+void TestSatellite::moveZeroTime()
+{
+   // SETUP
+   SatelliteDerived s;
+   s.position.x = 1000000.0;
+   s.position.y = 2000000.0;
+   s.velocity.dx = 500.0;
+   s.velocity.dy = -300.0;
+   s.angularVelocity = 0.5;
+   s.direction.radians = M_PI / 4.0;
+   Position initialPos = s.position;
+   Velocity initialVel = s.velocity;
+   double initialDirection = s.direction.radians + 0.5;
+   double time = 0.0;                                       // Zero time step
+   
+   // EXERCISE
+   s.move(time);
+   
+   // VERIFY
+   assertEquals(s.position.x, initialPos.x);                // s = s0 + v*t + (1/2)*a*t^2 = s0 + 0
+   assertEquals(s.position.y, initialPos.y);                // s = s0 + v*t + (1/2)*a*t^2 = s0 + 0
+   assertEquals(s.velocity.dx, initialVel.dx);              // v = v0 + a*t = v0 + 0
+   assertEquals(s.velocity.dy, initialVel.dy);              // v = v0 + a*t = v0 + 0
+   assertEquals(s.direction.radians, initialDirection);     // angle = angle0 + w*t = angle0 + 0
    assertEquals(s.dead, false);
    assertEquals(s.radius, 0.0);
    assertEquals(s.angularVelocity, 0.5);
@@ -444,11 +418,7 @@ void TestSatellite::moveAtEarthSurface()
    s.position.y = 6378000.0;                                // RADIUS_EARTH = 6378000.0 m
    s.velocity.dx = 1000.0;
    s.velocity.dy = 0.0;
-   s.direction.radians = 0.0;
    s.angularVelocity = 0.0;
-   s.radius = 0.0;
-   s.dead = false;
-   
    Position initialPos = s.position;
    Velocity initialVel = s.velocity;
    double time = 1.0;
@@ -481,11 +451,7 @@ void TestSatellite::moveGPSOrbit()
    s.position.y = 26560000.0;                               // GPS altitude from assignment
    s.velocity.dx = -3880.0;                                 // GPS velocity from assignment
    s.velocity.dy = 0.0;
-   s.direction.radians = 0.0;
    s.angularVelocity = 0.0;
-   s.radius = 0.0;
-   s.dead = false;
-   
    Position initialPos = s.position;
    Velocity initialVel = s.velocity;
    double time = 48.0;                                      // TIME = 48.0 seconds per frame

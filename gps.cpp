@@ -58,10 +58,10 @@ Gps::Gps(int index)
  ***************************************************/
 void Gps::destroy(std::vector<std::unique_ptr<Satellite>>* satellites)
 {
-   satellites->push_back(std::make_unique<GpsCenter>(*this, Angle(60.0), 8.0));
-   satellites->push_back(std::make_unique<GpsLeft>(*this, Angle(180.0), 7.0)); // changing left and right to 3 makes them appear
-   satellites->push_back(std::make_unique<GpsRight>(*this, Angle(300.0), 7.0)); // for some reason these break into fragments on spawn
-
+   satellites->push_back(std::make_unique<GpsCenter>(*this, Angle(60.0), 7.0));
+   satellites->push_back(std::make_unique<GpsLeft>(*this, Angle(180.0), 8.0));
+   satellites->push_back(std::make_unique<GpsRight>(*this, Angle(300.0), 8.0));
+   
    satellites->push_back(std::make_unique<Fragment>(*this, Angle(0.0)));
    satellites->push_back(std::make_unique<Fragment>(*this, Angle(0.0)));
 }

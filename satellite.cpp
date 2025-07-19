@@ -7,7 +7,6 @@
  *    base class for every moving and destroyable object
  ************************************************************************/
 
-#pragma once
 #include "satellite.h"
 #include "acceleration.h"
 

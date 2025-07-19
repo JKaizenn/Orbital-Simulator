@@ -144,7 +144,7 @@ public:
    Fragment() : Satellite() {}
    Fragment(Satellite& whole, const Angle& direction) : Satellite(whole, direction) { angularVelocity = 0.5; radius = 2.0; }
    ~Fragment() {}
-   void draw(ogstream* pgout)  const;
+   void draw(ogstream* pgout)  const override;
    void destroy(std::vector<std::unique_ptr<Satellite>>* satellites) override;
-   void move(double time);
+   void move(double time) override;
 };

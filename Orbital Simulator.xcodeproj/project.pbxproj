@@ -13,7 +13,6 @@
 		BB88BE8C2E2C072D000366AD /* testDragon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BE6F2E2C072D000366AD /* testDragon.cpp */; };
 		BB88BE8D2E2C072D000366AD /* satellite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BE622E2C072D000366AD /* satellite.cpp */; };
 		BB88BE8E2E2C072D000366AD /* sim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BE642E2C072D000366AD /* sim.cpp */; };
-		BB88BE8F2E2C072D000366AD /* physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BE5C2E2C072D000366AD /* physics.cpp */; };
 		BB88BE902E2C072D000366AD /* velocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BE882E2C072D000366AD /* velocity.cpp */; };
 		BB88BE912E2C072D000366AD /* uiDraw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BE832E2C072D000366AD /* uiDraw.cpp */; };
 		BB88BE922E2C072D000366AD /* hubble.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BE592E2C072D000366AD /* hubble.cpp */; };
@@ -65,8 +64,6 @@
 		BB88BE582E2C072D000366AD /* hubble.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hubble.h; sourceTree = "<group>"; };
 		BB88BE592E2C072D000366AD /* hubble.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = hubble.cpp; sourceTree = "<group>"; };
 		BB88BE5A2E2C072D000366AD /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		BB88BE5B2E2C072D000366AD /* physics.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = physics.h; sourceTree = "<group>"; };
-		BB88BE5C2E2C072D000366AD /* physics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = physics.cpp; sourceTree = "<group>"; };
 		BB88BE5D2E2C072D000366AD /* position.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = position.h; sourceTree = "<group>"; };
 		BB88BE5E2E2C072D000366AD /* position.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = position.cpp; sourceTree = "<group>"; };
 		BB88BE5F2E2C072D000366AD /* projectile.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = projectile.h; sourceTree = "<group>"; };
@@ -139,7 +136,6 @@
 				BB88BE572E2C072D000366AD /* gps.cpp */,
 				BB88BE592E2C072D000366AD /* hubble.cpp */,
 				BB88BE5A2E2C072D000366AD /* main.cpp */,
-				BB88BE5C2E2C072D000366AD /* physics.cpp */,
 				BB88BE5E2E2C072D000366AD /* position.cpp */,
 				BB88BE602E2C072D000366AD /* projectile.cpp */,
 				BB88BE622E2C072D000366AD /* satellite.cpp */,
@@ -166,7 +162,6 @@
 				BB88BE552E2C072D000366AD /* earth.h */,
 				BB88BE562E2C072D000366AD /* gps.h */,
 				BB88BE582E2C072D000366AD /* hubble.h */,
-				BB88BE5B2E2C072D000366AD /* physics.h */,
 				BB88BE5D2E2C072D000366AD /* position.h */,
 				BB88BE5F2E2C072D000366AD /* projectile.h */,
 				BB88BE612E2C072D000366AD /* satellite.h */,
@@ -277,7 +272,6 @@
 				BB88BE8C2E2C072D000366AD /* testDragon.cpp in Sources */,
 				BB88BE8D2E2C072D000366AD /* satellite.cpp in Sources */,
 				BB88BE8E2E2C072D000366AD /* sim.cpp in Sources */,
-				BB88BE8F2E2C072D000366AD /* physics.cpp in Sources */,
 				BB88BE902E2C072D000366AD /* velocity.cpp in Sources */,
 				BB88BE912E2C072D000366AD /* uiDraw.cpp in Sources */,
 				BB88BE922E2C072D000366AD /* hubble.cpp in Sources */,

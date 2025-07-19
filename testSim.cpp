@@ -66,8 +66,8 @@ void TestSim::move_twoSatellitesNoCollision()
    slink->radius = 5.0;
    slink->dead = false;
    slink->age = 0;
-   sim.satellites.push_back(move(hub));
-   sim.satellites.push_back(move(slink));
+   sim.satellites.push_back(std::move(hub));
+   sim.satellites.push_back(std::move(slink));
 
    // EXERCISE
    sim.move();
@@ -108,8 +108,8 @@ void TestSim::move_satellitesCollision()
    slink->radius = 5.0;
    slink->dead = false;
    slink->age = 0;
-   sim.satellites.push_back(move(hub));
-   sim.satellites.push_back(move(slink));
+   sim.satellites.push_back(std::move(hub));
+   sim.satellites.push_back(std::move(slink));
    // EXERCISE
    sim.move();
 
@@ -149,8 +149,8 @@ void TestSim::move_fragmentCollision()
    sputnik->radius = 4.0;
    sputnik->dead = false;
    sputnik->age = 0;
-   sim.satellites.push_back(move(frag));
-   sim.satellites.push_back(move(sputnik));
+   sim.satellites.push_back(std::move(frag));
+   sim.satellites.push_back(std::move(sputnik));
    // EXERCISE
    sim.move();
 
@@ -190,8 +190,8 @@ void TestSim::move_projectileCollision()
    gps->radius = 12.0; // 1 536 000
    gps->dead = false;
    gps->age = 0;
-   sim.satellites.push_back(move(proj));
-   sim.satellites.push_back(move(gps));
+   sim.satellites.push_back(std::move(proj));
+   sim.satellites.push_back(std::move(gps));
    // EXERCISE
    sim.move();
 

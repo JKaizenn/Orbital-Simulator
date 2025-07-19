@@ -8,7 +8,7 @@
  ************************************************************************/
 #define _USE_MATH_DEFINES
 #include "dreamchaser.h"
-#include "testDreamChaser.h"
+#include "testDreamchaser.h"
 #include <math.h>
 
 /*************************************

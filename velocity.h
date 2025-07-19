@@ -22,7 +22,7 @@ class TestHubble;
 class TestDreamChaser;
 class TestProjectile;
 class TestSim;
-// for add()
+class TestAngle;
 class Acceleration;
 class Angle;
 
@@ -35,6 +35,7 @@ class Velocity
 {
    // for unit tests
    friend TestPosition;
+   friend TestAngle;
    friend TestVelocity;
    friend TestSatellite;
    friend TestSputnik;

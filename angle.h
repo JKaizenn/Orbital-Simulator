@@ -17,6 +17,7 @@ class TestAngle;
 class TestPosition;
 class TestVelocity;
 class TestAcceleration;
+class TestVelocity;
 class TestSatellite;
 class TestSputnik;
 class TestStarlink;
@@ -37,6 +38,7 @@ public:
    friend TestAcceleration;
    friend TestVelocity;
    friend TestAngle;
+   friend TestVelocity;
    friend TestSatellite;
    friend TestSputnik;
    friend TestStarlink;

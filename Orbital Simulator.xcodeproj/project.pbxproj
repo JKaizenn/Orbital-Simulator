@@ -33,6 +33,9 @@
 		BB88BEA12E2C072D000366AD /* starlink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BE692E2C072D000366AD /* starlink.cpp */; };
 		BB88BEA22E2C072D000366AD /* testStarlink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BE802E2C072D000366AD /* testStarlink.cpp */; };
 		BB88BEA32E2C072D000366AD /* testGps.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BE732E2C072D000366AD /* testGps.cpp */; };
+		BB88BEA52E2C5032000366AD /* testVelocity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BEA42E2C501F000366AD /* testVelocity.cpp */; };
+		BB88BEA72E2C5104000366AD /* testAcceleration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BEA62E2C50FD000366AD /* testAcceleration.cpp */; };
+		BB88BEA92E2C5195000366AD /* testAngle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BB88BEA82E2C5192000366AD /* testAngle.cpp */; };
 		C11C7EA425780B2100EA4B2E /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11C7EA225780B2100EA4B2E /* GLUT.framework */; };
 		C11C7EA525780B2100EA4B2E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C11C7EA325780B2100EA4B2E /* OpenGL.framework */; };
 /* End PBXBuildFile section */
@@ -108,6 +111,9 @@
 		BB88BE862E2C072D000366AD /* unitTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = unitTest.h; sourceTree = "<group>"; };
 		BB88BE872E2C072D000366AD /* velocity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = velocity.h; sourceTree = "<group>"; };
 		BB88BE882E2C072D000366AD /* velocity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = velocity.cpp; sourceTree = "<group>"; };
+		BB88BEA42E2C501F000366AD /* testVelocity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = testVelocity.cpp; sourceTree = "<group>"; };
+		BB88BEA62E2C50FD000366AD /* testAcceleration.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = testAcceleration.cpp; sourceTree = "<group>"; };
+		BB88BEA82E2C5192000366AD /* testAngle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = testAngle.cpp; sourceTree = "<group>"; };
 		C11C7E962578098A00EA4B2E /* Lab09 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Lab09; sourceTree = BUILT_PRODUCTS_DIR; };
 		C11C7EA225780B2100EA4B2E /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		C11C7EA325780B2100EA4B2E /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -143,6 +149,8 @@
 				BB88BE662E2C072D000366AD /* sputnik.cpp */,
 				BB88BE692E2C072D000366AD /* starlink.cpp */,
 				BB88BE6B2E2C072D000366AD /* test.cpp */,
+				BB88BEA62E2C50FD000366AD /* testAcceleration.cpp */,
+				BB88BEA82E2C5192000366AD /* testAngle.cpp */,
 				BB88BE6F2E2C072D000366AD /* testDragon.cpp */,
 				BB88BE712E2C072D000366AD /* testDreamchaser.cpp */,
 				BB88BE732E2C072D000366AD /* testGps.cpp */,
@@ -152,6 +160,7 @@
 				BB88BE7C2E2C072D000366AD /* testSim.cpp */,
 				BB88BE7E2E2C072D000366AD /* testSputnik.cpp */,
 				BB88BE802E2C072D000366AD /* testStarlink.cpp */,
+				BB88BEA42E2C501F000366AD /* testVelocity.cpp */,
 				BB88BE832E2C072D000366AD /* uiDraw.cpp */,
 				BB88BE852E2C072D000366AD /* uiInteract.cpp */,
 				BB88BE882E2C072D000366AD /* velocity.cpp */,
@@ -267,14 +276,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				BB88BE892E2C072D000366AD /* testDreamchaser.cpp in Sources */,
+				BB88BEA52E2C5032000366AD /* testVelocity.cpp in Sources */,
 				BB88BE8A2E2C072D000366AD /* angle.cpp in Sources */,
 				BB88BE8B2E2C072D000366AD /* gps.cpp in Sources */,
 				BB88BE8C2E2C072D000366AD /* testDragon.cpp in Sources */,
 				BB88BE8D2E2C072D000366AD /* satellite.cpp in Sources */,
 				BB88BE8E2E2C072D000366AD /* sim.cpp in Sources */,
+				BB88BEA72E2C5104000366AD /* testAcceleration.cpp in Sources */,
 				BB88BE902E2C072D000366AD /* velocity.cpp in Sources */,
 				BB88BE912E2C072D000366AD /* uiDraw.cpp in Sources */,
 				BB88BE922E2C072D000366AD /* hubble.cpp in Sources */,
+				BB88BEA92E2C5195000366AD /* testAngle.cpp in Sources */,
 				BB88BE932E2C072D000366AD /* sputnik.cpp in Sources */,
 				BB88BE942E2C072D000366AD /* main.cpp in Sources */,
 				BB88BE952E2C072D000366AD /* testHubble.cpp in Sources */,
